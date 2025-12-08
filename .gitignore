@@ -1,0 +1,42 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/pnpm-lock.yaml # pnpm lock file
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# debug
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+lerna-debug.log*
+.npm/
+.eslintcache
+
+# env files
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+# next-env.d.ts - often useful to commit for type safety across team, removing from ignore
+
+# OS and Editor Specific
+.DS_Store
+Thumbs.db
+
+# Local data and secrets (ensure these are not committed)
+*.db
+*.sqlite
+*.sqlite3
+.local/
