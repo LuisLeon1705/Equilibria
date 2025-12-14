@@ -1,12 +1,13 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useEffect } from "react"
 import { getSupabaseClient } from "@/lib/supabase-client"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card } from "@/components/ui/card"
+import { Label } from "@/components/ui/label"
+import { useToast } from "@/components/ui/use-toast"
 import { AlertCircle } from "lucide-react"
 
 interface ProfileFormProps {
@@ -17,11 +18,15 @@ export function ProfileForm({ user }: ProfileFormProps) {
   const [fullName, setFullName] = useState("")
   const [fieldOfStudy, setFieldOfStudy] = useState("")
   const [hoursPerWeek, setHoursPerWeek] = useState(0)
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
   const supabase = getSupabaseClient()
+  const { toast } = useToast()
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -34,7 +39,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
         setFieldOfStudy(data.field_of_study || "")
         setHoursPerWeek(data.hours_per_week_working || 0)
       }
-
+      setEmail(user.email || "")
       setLoading(false)
     }
 
@@ -53,20 +58,54 @@ export function ProfileForm({ user }: ProfileFormProps) {
         return
       }
 
-      const { error: updateError } = await supabase
+      if (password !== confirmPassword) {
+        toast({
+          title: 'Error',
+          description: 'Passwords do not match.',
+          variant: 'destructive',
+        });
+        setSaving(false);
+        return;
+      }
+
+      const authUpdates: { email?: string; password?: string; } = {};
+      if (email && email !== user.email) {
+        authUpdates.email = email;
+      }
+      if (password) {
+        authUpdates.password = password;
+      }
+      
+      if(Object.keys(authUpdates).length > 0) {
+        const { error: authError } = await supabase.auth.updateUser(authUpdates);
+        if (authError) {
+            setError(authError.message)
+            setSaving(false)
+            return
+        }
+      }
+
+      const { error: upsertError } = await supabase
         .from("profiles")
-        .update({
+        .upsert({
+          user_id: user.id,
+          email: email,
           full_name: fullName,
           field_of_study: fieldOfStudy,
           hours_per_week_working: hoursPerWeek,
+        }, {
+          onConflict: 'user_id',
         })
-        .eq("user_id", user.id)
 
-      if (updateError) {
-        setError(updateError.message)
+      if (upsertError) {
+        setError(upsertError.message)
       } else {
         setSuccess(true)
         setTimeout(() => setSuccess(false), 3000)
+        toast({
+            title: 'Profile updated',
+            description: 'Your profile has been updated successfully.',
+        });
       }
     } catch (err) {
       setError("An unexpected error occurred")
@@ -98,17 +137,19 @@ export function ProfileForm({ user }: ProfileFormProps) {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-foreground mb-1">Full Name</label>
+          <Label className="block text-sm font-medium text-foreground mb-1">Full Name</Label>
           <Input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} disabled={saving} />
         </div>
-
         <div>
-          <label className="block text-sm font-medium text-foreground mb-1">Field of Study</label>
+          <Label className="block text-sm font-medium text-foreground mb-1">Email</Label>
+          <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} disabled={saving} />
+        </div>
+        <div>
+          <Label className="block text-sm font-medium text-foreground mb-1">Field of Study</Label>
           <Input type="text" value={fieldOfStudy} onChange={(e) => setFieldOfStudy(e.target.value)} disabled={saving} />
         </div>
-
         <div>
-          <label className="block text-sm font-medium text-foreground mb-1">Hours Working Per Week</label>
+          <Label className="block text-sm font-medium text-foreground mb-1">Hours Working Per Week</Label>
           <Input
             type="number"
             min="0"
@@ -117,6 +158,24 @@ export function ProfileForm({ user }: ProfileFormProps) {
             onChange={(e) => setHoursPerWeek(Number.parseInt(e.target.value))}
             disabled={saving}
           />
+        </div>
+        <div>
+            <Label htmlFor="password">New Password</Label>
+            <Input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            />
+        </div>
+        <div>
+            <Label htmlFor="confirmPassword">Confirm New Password</Label>
+            <Input
+            id="confirmPassword"
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            />
         </div>
 
         <Button type="submit" className="bg-primary hover:bg-primary/90" disabled={saving}>

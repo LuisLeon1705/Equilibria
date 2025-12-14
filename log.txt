@@ -1,0 +1,93 @@
+forward-logs-shared.ts:95 Download the React DevTools for a better development experience: https://react.dev/link/react-devtools
+forward-logs-shared.ts:95 [HMR] connected
+script.debug.js:1 [Vercel Web Analytics] Debug mode is enabled by default in development. No requests will be sent to the server.
+script.debug.js:1 [Vercel Web Analytics] Running queued event pageview {route: '/profile', path: '/profile'}
+script.debug.js:1 [Vercel Web Analytics] [pageview] http://localhost:3000/profile {o: 'http://localhost:3000/profile', sv: '0.1.3', sdkn: '@vercel/analytics/next', sdkv: '1.5.0', ts: 1765749239524, …}
+theme-settings.tsx:18  Uncaught ReferenceError: useState is not defined
+    at ThemeSettings (theme-settings.tsx:18:47)
+    at Object.react_stack_bottom_frame (react-dom-client.development.js:28016:20)
+    at renderWithHooks (react-dom-client.development.js:7982:22)
+    at updateFunctionComponent (react-dom-client.development.js:10499:19)
+    at beginWork (react-dom-client.development.js:12134:18)
+    at runWithFiberInDEV (react-dom-client.development.js:984:30)
+    at performUnitOfWork (react-dom-client.development.js:18995:22)
+    at workLoopSync (react-dom-client.development.js:18823:41)
+    at renderRootSync (react-dom-client.development.js:18804:11)
+    at performWorkOnRoot (react-dom-client.development.js:17912:35)
+    at performWorkOnRootViaSchedulerTask (react-dom-client.development.js:20382:7)
+    at MessagePort.performWorkUntilDeadline (scheduler.development.js:45:48)
+ThemeSettings @ theme-settings.tsx:18
+react_stack_bottom_frame @ react-dom-client.development.js:28016
+renderWithHooks @ react-dom-client.development.js:7982
+updateFunctionComponent @ react-dom-client.development.js:10499
+beginWork @ react-dom-client.development.js:12134
+runWithFiberInDEV @ react-dom-client.development.js:984
+performUnitOfWork @ react-dom-client.development.js:18995
+workLoopSync @ react-dom-client.development.js:18823
+renderRootSync @ react-dom-client.development.js:18804
+performWorkOnRoot @ react-dom-client.development.js:17912
+performWorkOnRootViaSchedulerTask @ react-dom-client.development.js:20382
+performWorkUntilDeadline @ scheduler.development.js:45
+<ThemeSettings>
+exports.jsxDEV @ react-jsx-dev-runtime.development.js:342
+ProfilePage @ page.tsx:89
+react_stack_bottom_frame @ react-dom-client.development.js:28016
+renderWithHooksAgain @ react-dom-client.development.js:8082
+renderWithHooks @ react-dom-client.development.js:7994
+updateFunctionComponent @ react-dom-client.development.js:10499
+beginWork @ react-dom-client.development.js:12134
+runWithFiberInDEV @ react-dom-client.development.js:984
+performUnitOfWork @ react-dom-client.development.js:18995
+workLoopSync @ react-dom-client.development.js:18823
+renderRootSync @ react-dom-client.development.js:18804
+performWorkOnRoot @ react-dom-client.development.js:17912
+performWorkOnRootViaSchedulerTask @ react-dom-client.development.js:20382
+performWorkUntilDeadline @ scheduler.development.js:45
+<ProfilePage>
+exports.jsx @ react-jsx-runtime.development.js:342
+ClientPageRoot @ client-page.tsx:83
+react_stack_bottom_frame @ react-dom-client.development.js:28016
+renderWithHooksAgain @ react-dom-client.development.js:8082
+renderWithHooks @ react-dom-client.development.js:7994
+updateFunctionComponent @ react-dom-client.development.js:10499
+beginWork @ react-dom-client.development.js:12083
+runWithFiberInDEV @ react-dom-client.development.js:984
+performUnitOfWork @ react-dom-client.development.js:18995
+workLoopSync @ react-dom-client.development.js:18823
+renderRootSync @ react-dom-client.development.js:18804
+performWorkOnRoot @ react-dom-client.development.js:17833
+performWorkOnRootViaSchedulerTask @ react-dom-client.development.js:20382
+performWorkUntilDeadline @ scheduler.development.js:45
+"use client"
+Function.all @ VM4522 <anonymous>:1
+Function.all @ VM4522 <anonymous>:1
+initializeElement @ react-server-dom-turbopack-client.browser.development.js:1932
+"use server"
+ResponseInstance @ react-server-dom-turbopack-client.browser.development.js:2767
+createResponseFromOptions @ react-server-dom-turbopack-client.browser.development.js:4628
+exports.createFromReadableStream @ react-server-dom-turbopack-client.browser.development.js:5032
+module evaluation @ app-index.tsx:211
+(anonymous) @ dev-base.ts:244
+runModuleExecutionHooks @ dev-base.ts:278
+instantiateModule @ dev-base.ts:238
+getOrInstantiateModuleFromParent @ dev-base.ts:162
+commonJsRequire @ runtime-utils.ts:389
+(anonymous) @ app-next-turbopack.ts:11
+(anonymous) @ app-bootstrap.ts:79
+loadScriptsInSequence @ app-bootstrap.ts:23
+appBootstrap @ app-bootstrap.ts:61
+module evaluation @ app-next-turbopack.ts:10
+(anonymous) @ dev-base.ts:244
+runModuleExecutionHooks @ dev-base.ts:278
+instantiateModule @ dev-base.ts:238
+getOrInstantiateRuntimeModule @ dev-base.ts:128
+registerChunk @ runtime-backend-dom.ts:57
+await in registerChunk
+registerChunk @ dev-base.ts:1149
+(anonymous) @ dev-backend-dom.ts:126
+(anonymous) @ dev-backend-dom.ts:126
+[NEW] Explain Console errors by using Copilot in Edge: click
+         
+         to explain an error. 
+        Learn more
+        Don't show again

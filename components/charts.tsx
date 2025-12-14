@@ -1,7 +1,18 @@
 "use client"
 
-export function LineChart({ data }: { data: number[] }) {
-  if (!data || data.length < 2) {
+import {
+  LineChart as RechartsLineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts"
+
+export function LineChart({ data }: { data: { name: string; stress: number }[] }) {
+  if (!data || data.length === 0) {
     return (
       <div className="w-full h-48 flex items-center justify-center bg-secondary/30 rounded-lg">
         <p className="text-muted-foreground text-sm">Not enough data to display chart.</p>
@@ -9,34 +20,25 @@ export function LineChart({ data }: { data: number[] }) {
     )
   }
 
-  const maxValue = Math.max(...data, 1)
-  const chartHeight = 160
-  const chartWidth = 300
-
-  const points = data
-    .map((value, i) => {
-      const x = (i / (data.length - 1)) * chartWidth
-      const y = chartHeight - (value / maxValue) * chartHeight
-      return `${x},${y}`
-    })
-    .join(" ")
-
   return (
-    <div className="w-full h-48 bg-secondary/30 rounded-lg p-4">
-      <svg viewBox={`0 0 ${chartWidth} ${chartHeight}`} className="w-full h-full">
-        <polyline
-          fill="none"
-          stroke="var(--color-primary, #007bff)"
-          strokeWidth="2"
-          points={points}
-        />
-        {data.map((value, i) => {
-          const x = (i / (data.length - 1)) * chartWidth
-          const y = chartHeight - (value / maxValue) * chartHeight
-          return <circle key={i} cx={x} cy={y} r="3" fill="var(--color-primary, #007bff)" />
-        })}
-      </svg>
-    </div>
+    <ResponsiveContainer width="100%" height={200}>
+      <RechartsLineChart
+        data={data}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis domain={[0, 10]} ticks={[0, 2, 4, 6, 8, 10]} />
+        <Tooltip />
+        <Legend />
+        <Line type="monotone" dataKey="stress" stroke="#8884d8" activeDot={{ r: 8 }} />
+      </RechartsLineChart>
+    </ResponsiveContainer>
   )
 }
 

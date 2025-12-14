@@ -18,20 +18,45 @@ import {
   ArrowLeft,
 } from "lucide-react"
 
+const DEFAULT_PREFERENCES = {
+  background_type: "color",
+  background_color: "#f8f9fa",
+  stress_color_low: "#22c55e",
+  stress_color_high: "#ef4444",
+  theme: "light",
+  default_calendar_view: "week",
+  stress_alerts_enabled: true,
+  stress_alert_threshold: 7,
+}
+
 export default function InstructionsPage() {
   const router = useRouter()
   const supabase = getSupabaseClient()
   const [user, setUser] = useState<any>(null)
+  const [preferences, setPreferences] = useState<any>(DEFAULT_PREFERENCES)
+  const [loading, setLoading] = useState(true)
   const [expandedSection, setExpandedSection] = useState<string | null>("getting-started")
 
   useEffect(() => {
-    const checkAuth = async () => {
+    const checkAuthAndGetPrefs = async () => {
       const {
         data: { user },
       } = await supabase.auth.getUser()
       setUser(user)
+
+      if (user) {
+        const { data: prefsData } = await supabase
+          .from("user_preferences")
+          .select("*")
+          .eq("user_id", user.id)
+          .single()
+        if (prefsData) {
+          setPreferences(prefsData)
+        }
+      }
+      setLoading(false)
     }
-    checkAuth()
+    checkAuthAndGetPrefs()
   }, [supabase])
 
   const toggleSection = (section: string) => {
@@ -182,8 +207,29 @@ export default function InstructionsPage() {
     },
   ]
 
+  const backgroundStyle = {
+    backgroundColor:
+      preferences?.background_type === "color"
+        ? preferences.background_color
+        : "transparent",
+    backgroundImage:
+      preferences?.background_type === "image" && preferences?.background_image_url
+        ? `url('${preferences.background_image_url}')`
+        : "none",
+    backgroundSize: "cover",
+    backgroundAttachment: "fixed",
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-muted-foreground">Loading...</div>
+      </div>
+    )
+  }
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background" style={backgroundStyle}>
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-8">
           <Button variant="ghost" onClick={() => router.back()} className="flex items-center gap-2">
@@ -236,7 +282,7 @@ export default function InstructionsPage() {
           ))}
         </div>
 
-        <Card className="border border-border bg-primary/5 p-6 mt-8">
+        <Card className="border border-border p-6 mt-8">
           <h3 className="font-semibold text-foreground mb-2 flex items-center gap-2">
             <Clock className="w-5 h-5 text-primary" />
             Quick Tip

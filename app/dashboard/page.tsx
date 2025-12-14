@@ -39,37 +39,35 @@ export default function DashboardPage() {
   const [showEventModal, setShowEventModal] = useState(false)
   const [showTaskModal, setShowTaskModal] = useState(false)
   const [preferences, setPreferences] = useState<any>(DEFAULT_PREFERENCES)
+  const [profileData, setProfileData] = useState<any>(null)
   const [selectedPeriod, setSelectedPeriod] = useState<TimePeriod>("week")
-  const [latestStressLog, setLatestStressLog] = useState<any>(null)
 
   const fetchData = async (userId: string) => {
     try {
-      const [eventsRes, tasksRes, prefsRes, stressRes] = await Promise.all([
+      const [eventsRes, tasksRes, prefsRes, profileRes] = await Promise.all([
         supabase.from("events").select("*").eq("user_id", userId).order("start_time", { ascending: true }).limit(100),
         supabase.from("tasks").select("*").eq("user_id", userId).order("due_date", { ascending: true }).limit(50),
         supabase
           .from("user_preferences")
           .select("*")
           .eq("user_id", userId)
-          .order("created_at", { ascending: false })
-          .limit(1),
+          .single(),
         supabase
-          .from("stress_logs")
+          .from("profiles")
           .select("*")
           .eq("user_id", userId)
-          .order("date", { ascending: false })
-          .limit(1),
+          .single(),
       ])
 
       const eventsData = eventsRes.data || []
       const tasksData = tasksRes.data || []
-      const prefsData = prefsRes.data && prefsRes.data.length > 0 ? prefsRes.data[0] : null
-      const stressData = stressRes.data && stressRes.data.length > 0 ? stressRes.data[0] : null
+      const prefsData = prefsRes.data
+      const profileData = profileRes.data
 
       setEvents(eventsData)
       setTasks(tasksData)
       setPreferences(prefsData || DEFAULT_PREFERENCES)
-      setLatestStressLog(stressData)
+      setProfileData(profileData)
 
       if (!prefsData) {
         try {
@@ -127,6 +125,17 @@ export default function DashboardPage() {
     }
   }
 
+  const handleDeleteEvent = async (eventId: string | number) => {
+    try {
+      const { error } = await supabase.from("events").delete().eq("id", eventId)
+      if (error) throw error
+      await fetchData(user.id) // Refresh data after deletion
+    } catch (error) {
+      console.error("Error deleting event:", error)
+      // Aquí podrías añadir un toast de error
+    }
+  }
+
   const handleLogout = async () => {
     await supabase.auth.signOut()
     router.push("/")
@@ -143,19 +152,22 @@ export default function DashboardPage() {
   const colorLow = preferences?.stress_color_low || DEFAULT_PREFERENCES.stress_color_low
   const colorHigh = preferences?.stress_color_high || DEFAULT_PREFERENCES.stress_color_high
 
-  const todaysEvents = events.filter(event => {
-    const today = new Date()
-    const eventStart = new Date(event.start_time)
-    return (
-      eventStart.getFullYear() === today.getFullYear() &&
-      eventStart.getMonth() === today.getMonth() &&
-      eventStart.getDate() === today.getDate()
-    )
-  }).length
+  const backgroundStyle = {
+    backgroundColor:
+      preferences?.background_type === "color"
+        ? preferences.background_color
+        : "transparent",
+    backgroundImage:
+      preferences?.background_type === "image" && preferences?.background_image_url
+        ? `url('${preferences.background_image_url}')`
+        : "none",
+    backgroundSize: "cover",
+    backgroundAttachment: "fixed",
+  }
 
   return (
-    <div className="min-h-screen bg-background">
-      <DashboardHeader user={user} onLogout={handleLogout} />
+    <div className="min-h-screen bg-background" style={backgroundStyle}>
+      <DashboardHeader profile={{...user, ...profileData, ...preferences}} onLogout={handleLogout} />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -177,7 +189,13 @@ export default function DashboardPage() {
                 <CalendarWithGlare events={events} colorLow={colorLow} colorHigh={colorHigh} />
                 <Separator className="my-6" />
                 <h3 className="text-lg font-semibold text-foreground mb-4">Full Calendar</h3>
-                <InteractiveCalendar events={events} colorLow={colorLow} colorHigh={colorHigh} />
+                <InteractiveCalendar
+                  events={events}
+                  colorLow={colorLow}
+                  colorHigh={colorHigh}
+                  onDeleteEvent={handleDeleteEvent}
+                  onRefreshEvents={() => fetchData(user.id)}
+                />
               </CardContent>
             </Card>
 
@@ -207,11 +225,9 @@ export default function DashboardPage() {
               colorLow={colorLow}
               colorHigh={colorHigh}
               onPeriodChange={setSelectedPeriod}
-              latestStressLog={latestStressLog}
-              preferences={preferences}
             />
 
-            <Card className="border border-border bg-primary/5 p-4">
+            <Card className="border border-border p-4">
               <h3 className="text-sm font-semibold text-foreground mb-3">Quick Stats</h3>
               <div className="space-y-2 text-sm">
                 <p className="flex justify-between">
@@ -230,17 +246,6 @@ export default function DashboardPage() {
                     {tasks.filter((t) => t.status === "completed").length}
                   </span>
                 </p>
-              </div>
-              <Separator className="my-4" />
-              <h3 className="text-sm font-semibold text-foreground mb-2">Quick Tips</h3>
-              <div className="text-xs text-muted-foreground">
-                {todaysEvents > 3 ? (
-                  <p>Your schedule is packed today. Remember to take short breaks!</p>
-                ) : todaysEvents > 0 ? (
-                  <p>Looks like a moderately busy day. Stay focused!</p>
-                ) : (
-                  <p>Your schedule is light. A great time to plan your week or get ahead on tasks.</p>
-                )}
               </div>
             </Card>
           </div>

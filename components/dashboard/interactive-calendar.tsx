@@ -186,7 +186,7 @@ export function InteractiveCalendar({
       await onDeleteEvent(selectedEvent.id);
       setIsDeleteDialogOpen(false);
       setSelectedEvent(null);
-      // onRefreshEvents() // Opcional: refrescar también al eliminar
+      onRefreshEvents() // Opcional: refrescar también al eliminar
     } catch (err) {
       console.error("Failed to delete event:", err);
     } finally {

@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { getSupabaseClient } from "@/lib/supabase-client"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -10,86 +10,29 @@ import { AlertCircle } from "lucide-react"
 interface EventFormProps {
   onSuccess?: () => void
   onCancel?: () => void
-  initialData?: any // Para modo de edición
 }
 
-/**
- * Formatea una fecha ISO (o Date) a un string para 'datetime-local' input.
- * Se ajusta a la zona horaria local.
- */
-const formatToDateTimeLocal = (isoString: string | Date): string => {
-  try {
-    const date = new Date(isoString)
-    // Restar el offset de la zona horaria para que .toISOString() devuelva la hora local
-    date.setMinutes(date.getMinutes() - date.getTimezoneOffset())
-    // Devuelve 'yyyy-MM-ddTHH:mm'
-    return date.toISOString().slice(0, 16)
-  } catch (e) {
-    return ""
-  }
-}
-
-/**
- * Formatea una fecha ISO (o Date) a un string para 'time' input.
- * Se ajusta a la zona horaria local.
- */
-const formatToTime = (isoString: string | Date): string => {
-   try {
-    const date = new Date(isoString)
-    // Restar el offset de la zona horaria
-    date.setMinutes(date.getMinutes() - date.getTimezoneOffset())
-    // Devuelve 'HH:mm'
-    return date.toISOString().slice(11, 16)
-  } catch (e) {
-    return ""
-  }
-}
-
-export function EventForm({ onSuccess, onCancel, initialData }: EventFormProps) {
+export function EventForm({ onSuccess, onCancel }: EventFormProps) {
   const [title, setTitle] = useState("")
   const [type, setType] = useState<"class" | "work" | "exam" | "project" | "personal">("personal")
   const [priority, setPriority] = useState(2)
-  const [startTime, setStartTime] = useState("") // 'datetime-local'
-  const [endTime, setEndTime] = useState("") // 'time'
+  const [startTime, setStartTime] = useState("")
+  const [endTime, setEndTime] = useState("")
   const [description, setDescription] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   const supabase = getSupabaseClient()
-  const isEditMode = Boolean(initialData)
-
-  // Rellenar el formulario si initialData cambia
-  useEffect(() => {
-    if (initialData) {
-      setTitle(initialData.title || "")
-      setType(initialData.type || "personal")
-      setPriority(initialData.priority || 2)
-      setDescription(initialData.description || "")
-      // Formatear las fechas ISO a los formatos de input correctos
-      setStartTime(formatToDateTimeLocal(initialData.start_time))
-      setEndTime(formatToTime(initialData.end_time))
-    } else {
-      // Resetear formulario si no hay initialData (ej. al crear)
-      setTitle("")
-      setType("personal")
-      setPriority(2)
-      setStartTime("")
-      setEndTime("")
-      setDescription("")
-    }
-  }, [initialData])
 
   const validateForm = () => {
     if (!title.trim()) return "Title is required"
     if (!startTime || !endTime) return "Start and end times are required"
-    if (!startTime.includes('T')) return "Invalid start time format."
 
-    const startDatePart = startTime.split('T')[0]
-    const fullEndTimeString = `${startDatePart}T${endTime}`
     const start = new Date(startTime)
-    const end = new Date(fullEndTimeString)
+    const end = new Date(endTime)
 
     if (end <= start) return "End time must be after start time"
+
     return null
   }
 
@@ -105,61 +48,38 @@ export function EventForm({ onSuccess, onCancel, initialData }: EventFormProps) 
     setLoading(true)
 
     try {
-      const { data: { user } } = await supabase.auth.getUser()
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
+
       if (!user) {
         setError("You must be logged in")
-        setLoading(false)
         return
       }
-      
-      const startDatePart = startTime.split('T')[0]
-      const fullEndTimeString = `${startDatePart}T${endTime}`
 
-      // Datos del evento listos para enviar
-      const eventData = {
-        user_id: user.id, // Asegurarse que user_id esté en insert/update si es necesario
+      const { error: insertError } = await supabase.from("events").insert({
+        user_id: user.id,
         title,
         type,
         priority,
         start_time: new Date(startTime).toISOString(),
-        end_time: new Date(fullEndTimeString).toISOString(),
+        end_time: new Date(endTime).toISOString(),
         description,
-      }
+      })
 
-      if (isEditMode) {
-        // --- LÓGICA DE ACTUALIZACIÓN ---
-        const { error: updateError } = await supabase
-          .from("events")
-          .update(eventData)
-          .match({ id: initialData.id, user_id: user.id }) // Seguridad: solo actualiza si el user_id coincide
-
-        if (updateError) {
-          setError(updateError.message)
-        } else {
-          onSuccess?.()
-        }
-
+      if (insertError) {
+        setError(insertError.message)
       } else {
-        // --- LÓGICA DE CREACIÓN (la que ya tenías) ---
-        const { error: insertError } = await supabase
-          .from("events")
-          .insert(eventData)
-
-        if (insertError) {
-          setError(insertError.message)
-        } else {
-          // Resetear formulario solo en creación exitosa
-          setTitle("")
-          setType("personal")
-          setPriority(2)
-          setStartTime("")
-          setEndTime("")
-          setDescription("")
-          onSuccess?.()
-        }
+        setTitle("")
+        setType("personal")
+        setPriority(2)
+        setStartTime("")
+        setEndTime("")
+        setDescription("")
+        onSuccess?.()
       }
     } catch (err) {
-      console.log("[v0] Error processing event:", err)
+      console.log("[v0] Error adding event:", err)
       setError("An unexpected error occurred")
     } finally {
       setLoading(false)
@@ -168,10 +88,6 @@ export function EventForm({ onSuccess, onCancel, initialData }: EventFormProps) 
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <h2 className="text-lg font-semibold text-foreground mb-4">
-        {isEditMode ? "Edit Event" : "Create New Event"}
-      </h2>
-      
       {error && (
         <div className="p-3 bg-destructive/10 border border-destructive/30 rounded-md flex gap-2 items-start">
           <AlertCircle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
@@ -207,6 +123,7 @@ export function EventForm({ onSuccess, onCancel, initialData }: EventFormProps) 
             <option value="personal">Personal</option>
           </select>
         </div>
+
         <div>
           <label className="block text-sm font-medium text-foreground mb-1">Priority (1-5)</label>
           <Input
@@ -234,10 +151,11 @@ export function EventForm({ onSuccess, onCancel, initialData }: EventFormProps) 
             disabled={loading}
           />
         </div>
+
         <div>
           <label className="block text-sm font-medium text-foreground mb-1">End Time</label>
           <Input
-            type="time"
+            type="datetime-local"
             value={endTime}
             onChange={(e) => setEndTime(e.target.value)}
             required
@@ -260,13 +178,11 @@ export function EventForm({ onSuccess, onCancel, initialData }: EventFormProps) 
 
       <div className="flex gap-2 pt-4">
         <Button type="submit" className="flex-1 bg-primary hover:bg-primary/90" disabled={loading}>
-          {loading ? (isEditMode ? "Saving..." : "Adding...") : (isEditMode ? "Save Changes" : "Add Event")}
+          {loading ? "Adding..." : "Add Event"}
         </Button>
-        {onCancel && (
-          <Button type="button" variant="outline" onClick={onCancel} disabled={loading}>
-            Cancel
-          </Button>
-        )}
+        <Button type="button" variant="outline" onClick={onCancel} disabled={loading}>
+          Cancel
+        </Button>
       </div>
     </form>
   )

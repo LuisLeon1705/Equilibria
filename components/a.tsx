@@ -39,7 +39,7 @@ export function StressIndicator({
           <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
             <div
               className={`h-full ${getStressColor()} transition-all duration-300`}
-              style={{ width: '100%' }}
+              style={{ width: `${(stressLevel / 10) * 100}%` }}
             />
           </div>
         </div>

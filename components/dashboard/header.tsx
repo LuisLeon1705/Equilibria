@@ -3,13 +3,14 @@
 import Link from "next/link"
 import { Calendar, LogOut, BookOpen, Settings } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 interface DashboardHeaderProps {
-  user?: any
+  profile?: any
   onLogout: () => void
 }
 
-export function DashboardHeader({ user, onLogout }: DashboardHeaderProps) {
+export function DashboardHeader({ profile, onLogout }: DashboardHeaderProps) {
   return (
     <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
@@ -37,9 +38,13 @@ export function DashboardHeader({ user, onLogout }: DashboardHeaderProps) {
         </nav>
 
         <div className="flex items-center gap-4">
+          <Avatar>
+            <AvatarImage src={profile?.profile_picture_url} />
+            <AvatarFallback>{profile?.full_name?.[0] || profile?.email?.[0]}</AvatarFallback>
+          </Avatar>
           <div className="text-right">
-            <p className="text-sm font-medium text-foreground">{user?.email}</p>
-            <p className="text-xs text-muted-foreground">Student-Worker</p>
+            <p className="text-sm font-medium text-foreground">{profile?.full_name || profile?.email}</p>
+            <p className="text-xs text-muted-foreground">{profile?.field_of_study || 'Student-Worker'}</p>
           </div>
           <Link href="/profile">
             <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">

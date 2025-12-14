@@ -24,38 +24,52 @@ export function StressIndicatorEnhanced({
   const [metrics, setMetrics] = useState<StressMetrics | null>(null)
   const [selectedPeriod, setSelectedPeriod] = useState<TimePeriod>(period)
 
+  // Keep selectedPeriod in sync if parent changes the prop
   useEffect(() => {
-    const today = new Date()
+    setSelectedPeriod(period)
+  }, [period])
+
+  useEffect(() => {
+    const now = new Date()
     let periodStart = new Date()
     let periodEnd = new Date()
 
     switch (selectedPeriod) {
-      case "day":
-        periodStart = new Date(today.getFullYear(), today.getMonth(), today.getDate())
-        periodEnd = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59)
+      case "day": {
+        periodStart = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+        periodEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999)
         break
-      case "week":
-        const dayOfWeek = today.getDay()
-        const diff = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1)
-        periodStart = new Date(today.setDate(diff))
+      }
+      case "week": {
+        // use clones to avoid mutating `now`
+        const clone = new Date(now)
+        const dayOfWeek = clone.getDay()
+        const diff = clone.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1) // Monday as start
+        periodStart = new Date(clone.getFullYear(), clone.getMonth(), diff)
         periodStart.setHours(0, 0, 0, 0)
         periodEnd = new Date(periodStart)
         periodEnd.setDate(periodEnd.getDate() + 6)
         periodEnd.setHours(23, 59, 59, 999)
         break
-      case "month":
-        periodStart = new Date(today.getFullYear(), today.getMonth(), 1)
-        periodEnd = new Date(today.getFullYear(), today.getMonth() + 1, 0, 23, 59, 59)
+      }
+      case "month": {
+        periodStart = new Date(now.getFullYear(), now.getMonth(), 1)
+        periodEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999)
         break
-      case "year":
-        periodStart = new Date(today.getFullYear(), 0, 1)
-        periodEnd = new Date(today.getFullYear(), 11, 31, 23, 59, 59)
+      }
+      case "year": {
+        periodStart = new Date(now.getFullYear(), 0, 1)
+        periodEnd = new Date(now.getFullYear(), 11, 31, 23, 59, 59, 999)
         break
+      }
     }
 
     const newMetrics = calculateStressMetrics(events, periodStart, periodEnd, selectedPeriod)
     setMetrics(newMetrics)
   }, [events, selectedPeriod])
+
+  // Helper to ensure widths are valid percentages
+  const clampPercent = (value: number) => `${Math.max(0, Math.min(100, value))}%`
 
   const handlePeriodChange = (newPeriod: TimePeriod) => {
     setSelectedPeriod(newPeriod)
@@ -106,8 +120,8 @@ export function StressIndicatorEnhanced({
           <div
             className="h-full transition-all duration-500 rounded-full shadow-lg"
             style={{
-              width: `${metrics.stressLevel * 10}%`,
-              background: `linear-gradient(to right, ${colorLow}, ${colorHigh})`,
+              width: clampPercent((metrics.stressLevel / 10) * 100),
+              background: gradient,
             }}
           />
         </div>
@@ -119,7 +133,7 @@ export function StressIndicatorEnhanced({
           <span className="font-medium text-foreground">{Math.round(metrics.density * 100)}%</span>
         </div>
         <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
-          <div className="h-full bg-primary/50 transition-all" style={{ width: `${metrics.density * 100}%` }} />
+          <div className="h-full bg-primary/50 transition-all" style={{ width: clampPercent(metrics.density * 100) }} />
         </div>
 
         {metrics.highPriorityCount > 0 && (
