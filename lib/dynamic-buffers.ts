@@ -118,19 +118,19 @@ export function getBufferRecommendations(
   // Check for days with too many events
   Object.values(riskMetrics).forEach((metrics) => {
     if (metrics.eventCount > 6) {
-      recommendations.push(`Consider reducing events on days with ${metrics.eventCount} activities`)
+      recommendations.push(`Considera reducir eventos en días con ${metrics.eventCount} actividades`)
     }
   })
 
   // Check for insufficient buffers
   if (buffers.length > 5) {
-    recommendations.push("Your schedule has many back-to-back events - add more gaps between tasks")
+    recommendations.push("Tu agenda tiene muchos eventos seguidos - agrega más espacios entre tareas")
   }
 
   // Check for high-priority clustering
   const highPriorityEvents = events.filter((e) => e.priority >= 8)
   if (highPriorityEvents.length > 3) {
-    recommendations.push("You have many critical-priority items - consider spreading them out")
+    recommendations.push("Tienes muchos elementos de prioridad crítica - considera distribuirlos mejor")
   }
 
   return recommendations

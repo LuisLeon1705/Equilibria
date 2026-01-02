@@ -28,7 +28,7 @@ export function calculateStressMetrics(
       density: 0,
       highPriorityCount: 0,
       hasInsufficientBuffers: false,
-      recommendations: ["You have a free schedule - great time to relax!"],
+      recommendations: ["¡Tienes una agenda libre! Es un gran momento para relajarte."],
       period,
     }
   }
@@ -82,16 +82,16 @@ export function calculateStressMetrics(
   // --- Recommendations ---
   const recommendations: string[] = []
   if (density > 0.8) {
-    recommendations.push("Your schedule is very dense. Consider finding some free time.")
+    recommendations.push("Tu agenda está muy saturada. Considera buscar tiempo libre.")
   }
   if (avgPriority > 4) {
-    recommendations.push("You have a lot of high-priority tasks. Try to delegate or postpone some.")
+    recommendations.push("Tienes muchas tareas de alta prioridad. Intenta delegar o posponer algunas.")
   }
   if (hasInsufficientBuffers) {
-    recommendations.push("You have events scheduled back-to-back. Consider adding buffer time.")
+    recommendations.push("Tienes eventos programados uno tras otro. Considera añadir tiempo de descanso.")
   }
   if (stressLevel === 0 && periodEvents.length > 0) {
-    recommendations.push("Your schedule is looking great. Keep it up!")
+    recommendations.push("¡Tu agenda se ve excelente! ¡Sigue así!")
   }
 
 
