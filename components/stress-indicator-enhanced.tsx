@@ -63,13 +63,13 @@ export function StressIndicatorEnhanced({
   }
 
   if (!metrics) {
-    return <div className="text-muted-foreground">Loading...</div>
+    return <div className="text-muted-foreground">Cargando...</div>
   }
 
   const getStressLabel = () => {
-    if (metrics.stressLevel <= 3) return "Low"
-    if (metrics.stressLevel <= 6) return "Medium"
-    return "High"
+    if (metrics.stressLevel <= 3) return "Bajo"
+    if (metrics.stressLevel <= 6) return "Medio"
+    return "Alto"
   }
 
   const gradient = getStressGradient(metrics.stressLevel, colorLow, colorHigh)
@@ -77,7 +77,7 @@ export function StressIndicatorEnhanced({
   return (
     <div className="bg-card border border-border rounded-lg p-4 space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-foreground">Stress Level</h3>
+        <h3 className="text-sm font-semibold text-foreground">Nivel de estrés</h3>
         <span className="text-xs font-medium px-2 py-1 rounded-full bg-primary/10 text-primary">
           {getStressLabel()}
         </span>
@@ -92,14 +92,19 @@ export function StressIndicatorEnhanced({
               selectedPeriod === p ? "bg-primary text-white" : "bg-muted text-muted-foreground hover:bg-muted/80"
             }`}
           >
-            {p.charAt(0).toUpperCase() + p.slice(1)}
+            {{
+              day: "Día",
+              week: "Semana",
+              month: "Mes",
+              year: "Año"
+            }[p]}
           </button>
         ))}
       </div>
 
       <div className="space-y-2">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-xs text-muted-foreground">Stress Level</span>
+          <span className="text-xs text-muted-foreground">Nivel de estrés</span>
           <span className="text-sm font-bold text-foreground">{metrics.stressLevel}/10</span>
         </div>
         <div className="w-full h-3 bg-muted rounded-full overflow-hidden border border-border">
@@ -115,7 +120,7 @@ export function StressIndicatorEnhanced({
 
       <div className="space-y-2 pt-2 border-t border-border text-xs">
         <div className="flex justify-between items-center">
-          <span className="text-muted-foreground">Schedule Density</span>
+          <span className="text-muted-foreground">Densidad de agenda</span>
           <span className="font-medium text-foreground">{Math.round(metrics.density * 100)}%</span>
         </div>
         <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
@@ -125,7 +130,7 @@ export function StressIndicatorEnhanced({
         {metrics.highPriorityCount > 0 && (
           <p className="text-muted-foreground">
             <Zap className="w-3 h-3 inline mr-1 text-warning" />
-            {metrics.highPriorityCount} high-priority item{metrics.highPriorityCount !== 1 ? "s" : ""}
+            {metrics.highPriorityCount} tarea{metrics.highPriorityCount !== 1 ? "s" : ""} de alta prioridad
           </p>
         )}
       </div>

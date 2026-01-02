@@ -76,14 +76,14 @@ export default function ProfilePage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-muted-foreground">Loading...</div>
+        <div className="text-muted-foreground">Cargando...</div>
       </div>
     )
   }
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Profile & Settings</h1>
+      <h1 className="text-2xl font-bold mb-6">Perfil y Configuracion</h1>
       <div className="space-y-8">
         <ProfileForm user={user} />
         <ThemeSettings preferences={preferences} />

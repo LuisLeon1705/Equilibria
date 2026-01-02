@@ -129,13 +129,13 @@ export function InteractiveCalendar({ events, colorLow = "#22c55e", colorHigh = 
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>Events for {format(selectedDate, "MMMM d", { locale: es })}</CardTitle>
+            <CardTitle>Eventos para {format(selectedDate, "MMMM d", { locale: es })}</CardTitle>
           </CardHeader>
           <CardContent className="max-h-[380px] overflow-y-auto p-0">
             {eventsForSelectedDay.length > 0 ? (
               eventsForSelectedDay.map((event) => <EventItem key={event.id} event={event} />)
             ) : (
-              <p className="p-4 text-center text-muted-foreground">No events for this day.</p>
+              <p className="p-4 text-center text-muted-foreground">No hay eventos para este día.</p>
             )}
           </CardContent>
         </Card>
@@ -167,7 +167,7 @@ export function InteractiveCalendar({ events, colorLow = "#22c55e", colorHigh = 
                 {dayEvents.length > 0 ? (
                   dayEvents.map(event => <EventItem key={event.id} event={event} />)
                 ) : (
-                  <p className="p-4 text-xs text-center text-muted-foreground">No events</p>
+                  <p className="p-4 text-xs text-center text-muted-foreground">Sin eventos</p>
                 )}
               </CardContent>
             </Card>
@@ -190,13 +190,13 @@ export function InteractiveCalendar({ events, colorLow = "#22c55e", colorHigh = 
           style={{ background: glareBackground }}
         />
         <CardHeader>
-          <CardTitle>Events for {format(selectedDate, "MMMM d, yyyy", { locale: es })}</CardTitle>
+          <CardTitle>Eventos para {format(selectedDate, "MMMM d, yyyy", { locale: es })}</CardTitle>
         </CardHeader>
         <CardContent className="p-0 relative z-10">
           {dayEvents.length > 0 ? (
             dayEvents.map(event => <EventItem key={event.id} event={event} />)
           ) : (
-            <p className="p-6 text-center text-muted-foreground">No events scheduled for this day.</p>
+            <p className="p-6 text-center text-muted-foreground">No hay eventos programados para este día.</p>
           )}
         </CardContent>
       </Card>
@@ -214,17 +214,17 @@ export function InteractiveCalendar({ events, colorLow = "#22c55e", colorHigh = 
       <Card>
         <CardContent className="p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <Button variant="outline" onClick={handlePrev}>Prev</Button>
-            <Button variant="outline" onClick={handleToday}>Today</Button>
-            <Button variant="outline" onClick={handleNext}>Next</Button>
+            <Button variant="outline" onClick={handlePrev}>Anterior</Button>
+            <Button variant="outline" onClick={handleToday}>Hoy</Button>
+            <Button variant="outline" onClick={handleNext}>Siguiente</Button>
           </div>
           <h2 className="text-lg sm:text-xl font-bold text-center order-first sm:order-none">
             {headerTitle}
           </h2>
           <div className="flex items-center gap-2">
-            <Button variant={view === 'day' ? 'default' : 'outline'} onClick={() => setView("day")}>Day</Button>
-            <Button variant={view === 'week' ? 'default' : 'outline'} onClick={() => setView("week")}>Week</Button>
-            <Button variant={view === 'month' ? 'default' : 'outline'} onClick={() => setView("month")}>Month</Button>
+            <Button variant={view === 'day' ? 'default' : 'outline'} onClick={() => setView("day")}>Día</Button>
+            <Button variant={view === 'week' ? 'default' : 'outline'} onClick={() => setView("week")}>Semana</Button>
+            <Button variant={view === 'month' ? 'default' : 'outline'} onClick={() => setView("month")}>Mes</Button>
           </div>
         </CardContent>
       </Card>

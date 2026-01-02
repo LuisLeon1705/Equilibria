@@ -15,7 +15,7 @@ export function LineChart({ data }: { data: { name: string; stress: number }[] }
   if (!data || data.length === 0) {
     return (
       <div className="w-full h-48 flex items-center justify-center bg-secondary/30 rounded-lg">
-        <p className="text-muted-foreground text-sm">Not enough data to display chart.</p>
+        <p className="text-muted-foreground text-sm">No hay suficientes datos para mostrar el gráfico.</p>
       </div>
     )
   }
@@ -54,7 +54,7 @@ export function BarChart({
   if (!data || data.length === 0 || totalValue === 0) {
     return (
       <div className="w-full h-24 flex items-center justify-center bg-secondary/30 rounded-lg">
-        <p className="text-muted-foreground text-sm">No tasks to display.</p>
+        <p className="text-muted-foreground text-sm">No hay tareas para mostrar.</p>
       </div>
     )
   }

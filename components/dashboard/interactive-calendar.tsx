@@ -196,11 +196,11 @@ export function InteractiveCalendar({
 
   const headerTitle = useMemo(() => {
     if (view === "day")
-      return format(selectedDate, "MMMM d, yyyy", { locale: es });
+      return format(selectedDate, "d 'de' MMMM, yyyy", { locale: es });
     if (view === "week") {
       const start = startOfWeek(selectedDate, { weekStartsOn: 1 });
       const end = endOfWeek(selectedDate, { weekStartsOn: 1 });
-      return `${format(start, "MMM d")} - ${format(end, "MMM d, yyyy")}`;
+      return `${format(start, "d MMM")} - ${format(end, "d MMM, yyyy")}`;
     }
     return format(selectedDate, "MMMM yyyy", { locale: es });
   }, [view, selectedDate]);
@@ -257,7 +257,7 @@ export function InteractiveCalendar({
         <Card>
           <CardHeader>
             <CardTitle>
-              Eventos - {format(selectedDate, "MMMM d", { locale: es })}
+              Eventos - {format(selectedDate, "d 'de' MMMM", { locale: es })}
             </CardTitle>
           </CardHeader>
           <CardContent className="max-h-[380px] overflow-y-auto p-0">
@@ -364,7 +364,7 @@ export function InteractiveCalendar({
         />
         <CardHeader>
           <CardTitle>
-            Eventos - {format(selectedDate, "MMMM d, yyyy", { locale: es })}
+            Eventos - {format(selectedDate, "d 'de' MMMM, yyyy", { locale: es })}
           </CardTitle>
         </CardHeader>
         <CardContent className="p-0 relative z-10">
@@ -400,13 +400,13 @@ export function InteractiveCalendar({
         <CardContent className="p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <Button variant="outline" onClick={handlePrev}>
-              Ant
+              Anterior
             </Button>
             <Button variant="outline" onClick={handleToday}>
               Hoy
             </Button>
             <Button variant="outline" onClick={handleNext}>
-              Sig
+              Siguiente
             </Button>
           </div>
           <h2 className="text-lg sm:text-xl font-bold text-center order-first sm:order-none">

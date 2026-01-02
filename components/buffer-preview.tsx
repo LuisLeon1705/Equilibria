@@ -19,20 +19,20 @@ export function BufferPreview({ events }: BufferPreviewProps) {
   return (
     <Card className="border border-border p-4 space-y-4">
       <div>
-        <h3 className="font-semibold text-foreground mb-2">Dynamic Buffers</h3>
+        <h3 className="font-semibold text-foreground mb-2">Buffers dinámicos</h3>
         <div className="text-sm space-y-1 text-muted-foreground">
           <p>
-            <strong>Total Buffer Time:</strong> {totalBufferMinutes} minutes this week
+            <strong>Tiempo total de buffer:</strong> {totalBufferMinutes} minutos esta semana
           </p>
           <p>
-            <strong>Daily Average:</strong> {averageBufferPerDay} minutes/day
+            <strong>Promedio diario:</strong> {averageBufferPerDay} minutos/día
           </p>
         </div>
       </div>
 
       {buffers.length > 0 && (
         <div>
-          <h4 className="font-medium text-foreground mb-2">Buffer Schedule:</h4>
+          <h4 className="font-medium text-foreground mb-2">Horario de buffers:</h4>
           <div className="space-y-2 text-sm">
             {buffers.slice(0, 5).map((buffer, idx) => (
               <div key={idx} className="flex items-start gap-2 p-2 bg-muted/30 rounded">
@@ -43,7 +43,7 @@ export function BufferPreview({ events }: BufferPreviewProps) {
                 </div>
               </div>
             ))}
-            {buffers.length > 5 && <p className="text-xs text-muted-foreground">+{buffers.length - 5} more buffers</p>}
+            {buffers.length > 5 && <p className="text-xs text-muted-foreground">+{buffers.length - 5} buffers más</p>}
           </div>
         </div>
       )}
@@ -52,7 +52,7 @@ export function BufferPreview({ events }: BufferPreviewProps) {
         <div>
           <h4 className="font-medium text-foreground mb-2 flex items-center gap-2">
             <AlertCircle className="w-4 h-4" />
-            Recommendations
+            Recomendaciones
           </h4>
           <ul className="space-y-1 text-sm text-muted-foreground list-disc list-inside">
             {recommendations.map((rec, idx) => (

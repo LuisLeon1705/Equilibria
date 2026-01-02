@@ -144,7 +144,7 @@ export default function DashboardPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-muted-foreground">Loading...</div>
+        <div className="text-muted-foreground">Cargando...</div>
       </div>
     )
   }
@@ -175,20 +175,20 @@ export default function DashboardPage() {
           <div className="lg:col-span-2 space-y-6">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between">
-                <CardTitle>Weekly Schedule</CardTitle>
+                <CardTitle>Horario Semanal</CardTitle>
                 <Button
                   onClick={() => setShowEventModal(true)}
                   size="sm"
                   className="gap-2 bg-primary hover:bg-primary/90"
                 >
                   <Plus className="w-4 h-4" />
-                  Add Event
+                  Añadir un Evento
                 </Button>
               </CardHeader>
               <CardContent>
                 <CalendarWithGlare events={events} colorLow={colorLow} colorHigh={colorHigh} />
                 <Separator className="my-6" />
-                <h3 className="text-lg font-semibold text-foreground mb-4">Full Calendar</h3>
+                <h3 className="text-lg font-semibold text-foreground mb-4">Calendario Completo</h3>
                 <InteractiveCalendar
                   events={events}
                   colorLow={colorLow}
@@ -201,14 +201,14 @@ export default function DashboardPage() {
 
             <Card>
               <CardHeader className="flex flex-row items-center justify-between">
-                <CardTitle>Tasks</CardTitle>
+                <CardTitle>Tareas</CardTitle>
                 <Button
                   onClick={() => setShowTaskModal(true)}
                   size="sm"
                   className="gap-2 bg-primary hover:bg-primary/90"
                 >
                   <Plus className="w-4 h-4" />
-                  Add Task
+                  Añadir una Tarea
                 </Button>
               </CardHeader>
               <CardContent>
@@ -228,20 +228,20 @@ export default function DashboardPage() {
             />
 
             <Card className="border border-border p-4">
-              <h3 className="text-sm font-semibold text-foreground mb-3">Quick Stats</h3>
+              <h3 className="text-sm font-semibold text-foreground mb-3">Estadísticas Rápidas</h3>
               <div className="space-y-2 text-sm">
                 <p className="flex justify-between">
-                  <span className="text-muted-foreground">Total Events</span>
+                  <span className="text-muted-foreground">Eventos Totales </span>
                   <span className="font-medium text-foreground">{events.length}</span>
                 </p>
                 <p className="flex justify-between">
-                  <span className="text-muted-foreground">Active Tasks</span>
+                  <span className="text-muted-foreground">Tareas Activas</span>
                   <span className="font-medium text-foreground">
                     {tasks.filter((t) => t.status !== "completed").length}
                   </span>
                 </p>
                 <p className="flex justify-between">
-                  <span className="text-muted-foreground">Completed</span>
+                  <span className="text-muted-foreground">Completadas</span>
                   <span className="font-medium text-foreground">
                     {tasks.filter((t) => t.status === "completed").length}
                   </span>

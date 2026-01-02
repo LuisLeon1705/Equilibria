@@ -169,7 +169,7 @@ export function EventForm({ onSuccess, onCancel, initialData }: EventFormProps) 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <h2 className="text-lg font-semibold text-foreground mb-4">
-        {isEditMode ? "Edit Event" : "Create New Event"}
+        {isEditMode ? "Editar evento" : "Crear nuevo evento"}
       </h2>
       
       {error && (
@@ -180,10 +180,10 @@ export function EventForm({ onSuccess, onCancel, initialData }: EventFormProps) 
       )}
 
       <div>
-        <label className="block text-sm font-medium text-foreground mb-1">Title</label>
+        <label className="block text-sm font-medium text-foreground mb-1">Título</label>
         <Input
           type="text"
-          placeholder="e.g., Math Lecture"
+          placeholder="Ej: Clase de Matemáticas"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
@@ -193,22 +193,22 @@ export function EventForm({ onSuccess, onCancel, initialData }: EventFormProps) 
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-foreground mb-1">Type</label>
+          <label className="block text-sm font-medium text-foreground mb-1">Tipo</label>
           <select
             value={type}
             onChange={(e) => setType(e.target.value as any)}
             className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground text-sm"
             disabled={loading}
           >
-            <option value="class">Class</option>
-            <option value="work">Work</option>
-            <option value="exam">Exam</option>
-            <option value="project">Project</option>
+            <option value="class">Clase</option>
+            <option value="work">Trabajo</option>
+            <option value="exam">Examen</option>
+            <option value="project">Proyecto</option>
             <option value="personal">Personal</option>
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-foreground mb-1">Priority (1-5)</label>
+          <label className="block text-sm font-medium text-foreground mb-1">Prioridad (1-5)</label>
           <Input
             type="number"
             min="1"
@@ -225,7 +225,7 @@ export function EventForm({ onSuccess, onCancel, initialData }: EventFormProps) 
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-foreground mb-1">Start Time</label>
+          <label className="block text-sm font-medium text-foreground mb-1">Hora de inicio</label>
           <Input
             type="datetime-local"
             value={startTime}
@@ -235,7 +235,7 @@ export function EventForm({ onSuccess, onCancel, initialData }: EventFormProps) 
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-foreground mb-1">End Time</label>
+          <label className="block text-sm font-medium text-foreground mb-1">Hora de fin</label>
           <Input
             type="time"
             value={endTime}
@@ -247,9 +247,9 @@ export function EventForm({ onSuccess, onCancel, initialData }: EventFormProps) 
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-foreground mb-1">Description (optional)</label>
+        <label className="block text-sm font-medium text-foreground mb-1">Descripción (opcional)</label>
         <textarea
-          placeholder="Add any notes..."
+          placeholder="Agrega notas..."
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground text-sm resize-none"
@@ -260,11 +260,11 @@ export function EventForm({ onSuccess, onCancel, initialData }: EventFormProps) 
 
       <div className="flex gap-2 pt-4">
         <Button type="submit" className="flex-1 bg-primary hover:bg-primary/90" disabled={loading}>
-          {loading ? (isEditMode ? "Saving..." : "Adding...") : (isEditMode ? "Save Changes" : "Add Event")}
+          {loading ? (isEditMode ? "Guardando..." : "Agregando...") : (isEditMode ? "Guardar cambios" : "Agregar evento")}
         </Button>
         {onCancel && (
           <Button type="button" variant="outline" onClick={onCancel} disabled={loading}>
-            Cancel
+            Cancelar
           </Button>
         )}
       </div>

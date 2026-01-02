@@ -25,13 +25,13 @@ export function EventForm({ onSuccess, onCancel }: EventFormProps) {
   const supabase = getSupabaseClient()
 
   const validateForm = () => {
-    if (!title.trim()) return "Title is required"
-    if (!startTime || !endTime) return "Start and end times are required"
+    if (!title.trim()) return "El título es obligatorio"
+    if (!startTime || !endTime) return "La hora de inicio y fin son obligatorias"
 
     const start = new Date(startTime)
     const end = new Date(endTime)
 
-    if (end <= start) return "End time must be after start time"
+    if (end <= start) return "La hora de fin debe ser posterior a la de inicio"
 
     return null
   }
@@ -53,7 +53,7 @@ export function EventForm({ onSuccess, onCancel }: EventFormProps) {
       } = await supabase.auth.getUser()
 
       if (!user) {
-        setError("You must be logged in")
+        setError("Debes iniciar sesión")
         return
       }
 
@@ -80,7 +80,7 @@ export function EventForm({ onSuccess, onCancel }: EventFormProps) {
       }
     } catch (err) {
       console.log("[v0] Error adding event:", err)
-      setError("An unexpected error occurred")
+      setError("Ocurrió un error inesperado")
     } finally {
       setLoading(false)
     }
@@ -96,10 +96,10 @@ export function EventForm({ onSuccess, onCancel }: EventFormProps) {
       )}
 
       <div>
-        <label className="block text-sm font-medium text-foreground mb-1">Title</label>
+        <label className="block text-sm font-medium text-foreground mb-1">Título</label>
         <Input
           type="text"
-          placeholder="e.g., Math Lecture"
+          placeholder="Ej: Clase de Matemáticas"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
@@ -109,23 +109,23 @@ export function EventForm({ onSuccess, onCancel }: EventFormProps) {
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-foreground mb-1">Type</label>
+          <label className="block text-sm font-medium text-foreground mb-1">Tipo</label>
           <select
             value={type}
             onChange={(e) => setType(e.target.value as any)}
             className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground text-sm"
             disabled={loading}
           >
-            <option value="class">Class</option>
-            <option value="work">Work</option>
-            <option value="exam">Exam</option>
-            <option value="project">Project</option>
+            <option value="class">Clase</option>
+            <option value="work">Trabajo</option>
+            <option value="exam">Examen</option>
+            <option value="project">Proyecto</option>
             <option value="personal">Personal</option>
           </select>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-foreground mb-1">Priority (1-5)</label>
+          <label className="block text-sm font-medium text-foreground mb-1">Prioridad (1-5)</label>
           <Input
             type="number"
             min="1"
@@ -142,7 +142,7 @@ export function EventForm({ onSuccess, onCancel }: EventFormProps) {
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-foreground mb-1">Start Time</label>
+          <label className="block text-sm font-medium text-foreground mb-1">Hora de inicio</label>
           <Input
             type="datetime-local"
             value={startTime}
@@ -153,7 +153,7 @@ export function EventForm({ onSuccess, onCancel }: EventFormProps) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-foreground mb-1">End Time</label>
+          <label className="block text-sm font-medium text-foreground mb-1">Hora de fin</label>
           <Input
             type="datetime-local"
             value={endTime}
@@ -165,9 +165,9 @@ export function EventForm({ onSuccess, onCancel }: EventFormProps) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-foreground mb-1">Description (optional)</label>
+        <label className="block text-sm font-medium text-foreground mb-1">Descripción (opcional)</label>
         <textarea
-          placeholder="Add any notes..."
+          placeholder="Agrega notas..."
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground text-sm resize-none"
@@ -178,10 +178,10 @@ export function EventForm({ onSuccess, onCancel }: EventFormProps) {
 
       <div className="flex gap-2 pt-4">
         <Button type="submit" className="flex-1 bg-primary hover:bg-primary/90" disabled={loading}>
-          {loading ? "Adding..." : "Add Event"}
+          {loading ? "Agregando..." : "Agregar evento"}
         </Button>
         <Button type="button" variant="outline" onClick={onCancel} disabled={loading}>
-          Cancel
+          Cancelar
         </Button>
       </div>
     </form>

@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -56,7 +55,7 @@ export default function ThemeSettings({ preferences }: { preferences: any }) {
     if (!user) {
         toast({
             title: 'Error',
-            description: 'You must be logged in to update your theme.',
+            description: 'Debes iniciar sesión para actualizar tu tema.',
             variant: 'destructive',
         });
         return;
@@ -80,7 +79,7 @@ export default function ThemeSettings({ preferences }: { preferences: any }) {
 
     if (error) {
       toast({
-        title: 'Error updating theme',
+        title: 'Error al actualizar el tema',
         description: error.message,
         variant: 'destructive',
       });
@@ -88,8 +87,8 @@ export default function ThemeSettings({ preferences }: { preferences: any }) {
     }
 
     toast({
-      title: 'Theme updated',
-      description: 'Your theme has been updated successfully.',
+      title: 'Tema actualizado',
+      description: 'Tu tema ha sido actualizado exitosamente.',
     });
     
     router.refresh();
@@ -100,17 +99,17 @@ export default function ThemeSettings({ preferences }: { preferences: any }) {
     <Card className="p-6">
         <form onSubmit={handleUpdateTheme} className="space-y-4">
         <div>
-            <Label htmlFor="profilePictureUrl">Profile Picture URL</Label>
+            <Label htmlFor="profilePictureUrl">URL de foto de perfil</Label>
             <Input
                 id="profilePictureUrl"
                 type="text"
                 value={profilePictureUrl}
                 onChange={(e) => setProfilePictureUrl(e.target.value)}
-                placeholder="https://example.com/avatar.png"
+                placeholder="https://ejemplo.com/avatar.png"
             />
         </div>
         <div className="flex items-center space-x-2">
-            <Label htmlFor="background-type">Use Image Background</Label>
+            <Label htmlFor="background-type">Usar imagen de fondo</Label>
             <Switch
                 id="background-type"
                 checked={backgroundType === 'image'}
@@ -120,7 +119,7 @@ export default function ThemeSettings({ preferences }: { preferences: any }) {
 
         {backgroundType === 'color' ? (
             <div>
-                <Label htmlFor="backgroundColor">Background Color</Label>
+                <Label htmlFor="backgroundColor">Color de fondo</Label>
                 <Input
                 id="backgroundColor"
                 type="color"
@@ -130,19 +129,19 @@ export default function ThemeSettings({ preferences }: { preferences: any }) {
             </div>
         ) : (
             <div>
-                <Label htmlFor="backgroundImage">Background Image URL</Label>
+                <Label htmlFor="backgroundImage">URL de imagen de fondo</Label>
                 <Input
                 id="backgroundImage"
                 type="text"
                 value={backgroundImageUrl}
                 onChange={(e) => setBackgroundImageUrl(e.target.value)}
-                placeholder="https://example.com/image.png"
+                placeholder="https://ejemplo.com/imagen.png"
                 />
             </div>
         )}
 
         <div>
-            <Label htmlFor="stressColorLow">Low Stress Color</Label>
+            <Label htmlFor="stressColorLow">Color para estrés bajo</Label>
             <Input
             id="stressColorLow"
             type="color"
@@ -151,7 +150,7 @@ export default function ThemeSettings({ preferences }: { preferences: any }) {
             />
         </div>
         <div>
-            <Label htmlFor="stressColorMedium">Medium Stress Color</Label>
+            <Label htmlFor="stressColorMedium">Color para estrés medio</Label>
             <Input
             id="stressColorMedium"
             type="color"
@@ -160,7 +159,7 @@ export default function ThemeSettings({ preferences }: { preferences: any }) {
             />
         </div>
         <div>
-            <Label htmlFor="stressColorHigh">High Stress Color</Label>
+            <Label htmlFor="stressColorHigh">Color para estrés alto</Label>
             <Input
             id="stressColorHigh"
             type="color"
@@ -169,7 +168,7 @@ export default function ThemeSettings({ preferences }: { preferences: any }) {
             />
         </div>
             <div>
-            <Label>Default Calendar View</Label>
+            <Label>Vista de calendario predeterminada</Label>
             <div className="flex gap-2">
                 {(["day", "week", "month", "year"] as const).map((v) => (
                 <Button
@@ -178,7 +177,12 @@ export default function ThemeSettings({ preferences }: { preferences: any }) {
                     variant={defaultCalendarView === v ? 'default' : 'outline'}
                     onClick={() => setDefaultCalendarView(v)}
                 >
-                    {v.charAt(0).toUpperCase() + v.slice(1)}
+                    {{
+                      day: "Día",
+                      week: "Semana",
+                      month: "Mes",
+                      year: "Año"
+                    }[v]}
                 </Button>
                 ))}
             </div>
@@ -189,10 +193,10 @@ export default function ThemeSettings({ preferences }: { preferences: any }) {
                 checked={stressAlertsEnabled}
                 onCheckedChange={setStressAlertsEnabled}
             />
-            <Label htmlFor="stress-alerts">Enable stress alerts</Label>
+            <Label htmlFor="stress-alerts">Activar alertas de estrés</Label>
             </div>
             <div>
-            <Label>Stress Alert Threshold</Label>
+            <Label>Umbral de alerta de estrés</Label>
             <div className="flex items-center gap-4">
                 <Slider
                 min={1}
@@ -204,7 +208,7 @@ export default function ThemeSettings({ preferences }: { preferences: any }) {
                 <span>{stressAlertThreshold}</span>
             </div>
             </div>
-        <Button type="submit">Save Theme</Button>
+        <Button type="submit">Guardar tema</Button>
         </form>
     </Card>
   );

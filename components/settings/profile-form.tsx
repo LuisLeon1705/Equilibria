@@ -54,14 +54,14 @@ export function ProfileForm({ user }: ProfileFormProps) {
 
     try {
       if (!user) {
-        setError("User not found")
+        setError("Usuario no encontrado")
         return
       }
 
       if (password !== confirmPassword) {
         toast({
           title: 'Error',
-          description: 'Passwords do not match.',
+          description: 'Las contraseñas no coinciden.',
           variant: 'destructive',
         });
         setSaving(false);
@@ -103,24 +103,24 @@ export function ProfileForm({ user }: ProfileFormProps) {
         setSuccess(true)
         setTimeout(() => setSuccess(false), 3000)
         toast({
-            title: 'Profile updated',
-            description: 'Your profile has been updated successfully.',
+            title: 'Perfil actualizado',
+            description: 'Tu perfil ha sido actualizado exitosamente.',
         });
       }
     } catch (err) {
-      setError("An unexpected error occurred")
+      setError("Ocurrió un error inesperado")
     } finally {
       setSaving(false)
     }
   }
 
   if (loading) {
-    return <div className="text-muted-foreground">Loading...</div>
+    return <div className="text-muted-foreground">Cargando...</div>
   }
 
   return (
     <Card className="border border-border p-6">
-      <h2 className="text-xl font-bold text-foreground mb-4">Profile Settings</h2>
+      <h2 className="text-xl font-bold text-foreground mb-4">Configuración de Perfil</h2>
 
       {error && (
         <div className="mb-4 p-3 bg-destructive/10 border border-destructive/30 rounded-md flex gap-2 items-start">
@@ -131,25 +131,25 @@ export function ProfileForm({ user }: ProfileFormProps) {
 
       {success && (
         <div className="mb-4 p-3 bg-green-100/30 border border-green-500/30 rounded-md">
-          <p className="text-sm text-green-600">Profile updated successfully!</p>
+          <p className="text-sm text-green-600">¡Perfil actualizado exitosamente!</p>
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <Label className="block text-sm font-medium text-foreground mb-1">Full Name</Label>
+          <Label className="block text-sm font-medium text-foreground mb-1">Nombre completo</Label>
           <Input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} disabled={saving} />
         </div>
         <div>
-          <Label className="block text-sm font-medium text-foreground mb-1">Email</Label>
+          <Label className="block text-sm font-medium text-foreground mb-1">Correo electrónico</Label>
           <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} disabled={saving} />
         </div>
         <div>
-          <Label className="block text-sm font-medium text-foreground mb-1">Field of Study</Label>
+          <Label className="block text-sm font-medium text-foreground mb-1">Área de estudio</Label>
           <Input type="text" value={fieldOfStudy} onChange={(e) => setFieldOfStudy(e.target.value)} disabled={saving} />
         </div>
         <div>
-          <Label className="block text-sm font-medium text-foreground mb-1">Hours Working Per Week</Label>
+          <Label className="block text-sm font-medium text-foreground mb-1">Horas trabajadas por semana</Label>
           <Input
             type="number"
             min="0"
@@ -160,7 +160,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
           />
         </div>
         <div>
-            <Label htmlFor="password">New Password</Label>
+            <Label htmlFor="password">Nueva contraseña</Label>
             <Input
             id="password"
             type="password"
@@ -169,7 +169,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
             />
         </div>
         <div>
-            <Label htmlFor="confirmPassword">Confirm New Password</Label>
+            <Label htmlFor="confirmPassword">Confirmar nueva contraseña</Label>
             <Input
             id="confirmPassword"
             type="password"
@@ -179,7 +179,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
         </div>
 
         <Button type="submit" className="bg-primary hover:bg-primary/90" disabled={saving}>
-          {saving ? "Saving..." : "Save Changes"}
+          {saving ? "Guardando..." : "Guardar cambios"}
         </Button>
       </form>
     </Card>

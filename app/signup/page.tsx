@@ -42,12 +42,12 @@ export default function SignupPage() {
     setError(null)
 
     if (!passwordsMatch) {
-      setError("Passwords do not match")
+      setError("Las contraseñas no coinciden")
       return
     }
 
     if (!passwordLengthValid) {
-      setError("Password must be at least 8 characters")
+      setError("La contraseña debe tener al menos 8 caracteres")
       return
     }
 
@@ -94,7 +94,7 @@ export default function SignupPage() {
         }, 1000)
       }
     } catch (err) {
-      setError("An unexpected error occurred")
+      setError("Un error inesperado ocurrió. Por favor, inténtalo de nuevo.")
     } finally {
       setLoading(false)
     }
@@ -112,8 +112,8 @@ export default function SignupPage() {
         </div>
 
         <Card className="border border-border bg-card p-8">
-          <h1 className="text-2xl font-bold text-foreground mb-2">Create Your Account</h1>
-          <p className="text-muted-foreground mb-6">Join student-workers managing their time better</p>
+          <h1 className="text-2xl font-bold text-foreground mb-2">Crea tu cuenta</h1>
+          <p className="text-muted-foreground mb-6">Unete a estudiantes-trabajadores que gestionan mejor su tiempo</p>
 
           {error && (
             <div className="mb-4 p-3 bg-destructive/10 border border-destructive/30 rounded-md flex gap-2 items-start">
@@ -125,14 +125,14 @@ export default function SignupPage() {
           {success && (
             <div className="mb-4 p-3 bg-green-100/10 border border-green-300/30 rounded-md flex gap-2 items-start">
               <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-green-600">Account created successfully! Redirecting...</p>
+              <p className="text-sm text-green-600">¡Cuenta Creada Exitosamente! Redirigiendo...</p>
             </div>
           )}
 
           <form onSubmit={handleSignup} className="space-y-4">
             <div>
               <label htmlFor="fullName" className="block text-sm font-medium text-foreground mb-1">
-                Full Name
+                Nombre Completo
               </label>
               <Input
                 id="fullName"
@@ -147,7 +147,7 @@ export default function SignupPage() {
 
             <div>
               <label htmlFor="fieldOfStudy" className="block text-sm font-medium text-foreground mb-1">
-                Field of Study (Optional)
+                Campo de Estuido (Opcional)
               </label>
               <Input
                 id="fieldOfStudy"
@@ -176,7 +176,7 @@ export default function SignupPage() {
 
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-foreground mb-1">
-                Password
+                Contraseña
               </label>
               <Input
                 id="password"
@@ -195,7 +195,7 @@ export default function SignupPage() {
                     <X className="w-4 h-4 text-muted-foreground" />
                   )}
                   <span className={passwordLengthValid ? "text-green-600" : "text-muted-foreground"}>
-                    At least 8 characters
+                    Minimo 8 caracteres
                   </span>
                 </p>
                 <p className="flex items-center gap-2">
@@ -205,7 +205,7 @@ export default function SignupPage() {
                     <X className="w-4 h-4 text-muted-foreground" />
                   )}
                   <span className={hasUpperCase ? "text-green-600" : "text-muted-foreground"}>
-                    At least one uppercase letter
+                    Al menos una letra mayúscula
                   </span>
                 </p>
                 <p className="flex items-center gap-2">
@@ -214,14 +214,14 @@ export default function SignupPage() {
                   ) : (
                     <X className="w-4 h-4 text-muted-foreground" />
                   )}
-                  <span className={hasNumbers ? "text-green-600" : "text-muted-foreground"}>At least one number</span>
+                  <span className={hasNumbers ? "text-green-600" : "text-muted-foreground"}>Al menos un número</span>
                 </p>
               </div>
             </div>
 
             <div>
               <label htmlFor="confirmPassword" className="block text-sm font-medium text-foreground mb-1">
-                Confirm Password
+                Confirmar Contraseña
               </label>
               <Input
                 id="confirmPassword"
@@ -237,12 +237,12 @@ export default function SignupPage() {
                   {passwordsMatch ? (
                     <>
                       <Check className="w-4 h-4 text-green-600" />
-                      <span className="text-green-600">Passwords match</span>
+                      <span className="text-green-600">Las contraseñas coinciden</span>
                     </>
                   ) : (
                     <>
                       <X className="w-4 h-4 text-destructive" />
-                      <span className="text-destructive">Passwords do not match</span>
+                      <span className="text-destructive">Las contraseñas no coinciden</span>
                     </>
                   )}
                 </p>
@@ -255,15 +255,15 @@ export default function SignupPage() {
           </form>
 
           <p className="text-center text-muted-foreground text-sm mt-4">
-            Already have an account?{" "}
+            ¿Ya tienes una cuenta?{" "}
             <Link href="/login" className="text-primary hover:underline font-medium">
-              Sign in
+              Iniciar Sesión
             </Link>
           </p>
         </Card>
 
         <p className="text-center text-muted-foreground text-xs mt-6">
-          By signing up, you agree to our Terms of Service and Privacy Policy
+          Al registrarte, aceptas nuestros Términos de Servicio y Política de Privacidad
         </p>
       </div>
     </div>

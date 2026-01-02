@@ -66,142 +66,142 @@ export default function InstructionsPage() {
   const sections = [
     {
       id: "getting-started",
-      title: "Getting Started",
+      title: "Comenzando",
       icon: <Zap className="w-5 h-5" />,
       content: [
         {
-          subtitle: "1. Complete Your Profile",
-          text: "After signing up, go to Settings to add your details: full name, field of study, and average work hours per week. This helps Equilibria personalize your stress recommendations.",
+          subtitle: "1. Completa tu perfil",
+          text: "Después de registrarte, ve a Configuración para añadir tus datos: nombre completo, área de estudio y horas promedio de trabajo por semana. Esto ayuda a Equilibria a personalizar tus recomendaciones de estrés.",
         },
         {
-          subtitle: "2. Add Your First Events",
-          text: "Click 'Add Event' to create your schedule. Include: classes, work shifts, exams, projects, and personal commitments. Set the event type and priority level.",
+          subtitle: "2. Añade tus primeros eventos",
+          text: "Haz clic en 'Agregar evento' para crear tu horario. Incluye: clases, turnos de trabajo, exámenes, proyectos y compromisos personales. Establece el tipo de evento y el nivel de prioridad.",
         },
         {
-          subtitle: "3. Create Tasks",
-          text: "Add tasks linked to your events or standalone. Tasks can represent assignments, study sessions, or work-related activities. Mark their priority and estimated hours.",
+          subtitle: "3. Crea tareas",
+          text: "Añade tareas vinculadas a tus eventos o independientes. Las tareas pueden representar entregas, sesiones de estudio o actividades laborales. Indica su prioridad y horas estimadas.",
         },
       ],
     },
     {
       id: "calendar-system",
-      title: "Understanding the Calendar",
+      title: "Comprendiendo el calendario",
       icon: <Calendar className="w-5 h-5" />,
       content: [
         {
-          subtitle: "Weekly View",
-          text: "Your calendar shows a 7-day week. Each column represents one day, color-coded by event type: Blue (classes), Green (work), Red (exams), Purple (projects), Gray (personal).",
+          subtitle: "Vista semanal",
+          text: "Tu calendario muestra una semana de 7 días. Cada columna representa un día, con colores según el tipo de evento: Azul (clases), Verde (trabajo), Rojo (exámenes), Púrpura (proyectos), Gris (personal).",
         },
         {
-          subtitle: "Dynamic Time Buffers",
-          text: "Equilibria automatically inserts buffer time between events to prevent burnout. These buffers (shown as light areas) are adjusted based on event intensity. After an exam, you get more buffer time to recover.",
+          subtitle: "Buffers de tiempo dinámicos",
+          text: "Equilibria inserta automáticamente tiempo de buffer entre eventos para prevenir el agotamiento. Estos buffers (mostrados como áreas claras) se ajustan según la intensidad del evento. Después de un examen, obtienes más tiempo de recuperación.",
         },
         {
-          subtitle: "Event Types & Priorities",
-          text: "Priority 1-3: Low stress events (meetings, casual tasks). Priority 4-5: Medium (regular classes). Priority 6-7: High (exams, major projects). Priority 8-10: Critical (final exams, submissions).",
+          subtitle: "Tipos de eventos y prioridades",
+          text: "Prioridad 1-3: Eventos de baja presión (reuniones, tareas casuales). Prioridad 4-5: Media (clases regulares). Prioridad 6-7: Alta (exámenes, proyectos importantes). Prioridad 8-10: Crítica (exámenes finales, entregas).",
         },
       ],
     },
     {
       id: "stress-indicator",
-      title: "The Stress Indicator",
+      title: "Indicador de estrés",
       icon: <AlertCircle className="w-5 h-5" />,
       content: [
         {
-          subtitle: "How It Works",
-          text: "The stress bar (top right) analyzes: schedule density (% of time with events), high-priority events this week, and buffer time availability. It updates in real-time as you add events.",
+          subtitle: "Cómo funciona",
+          text: "La barra de estrés (arriba a la derecha) analiza: densidad del calendario (% del tiempo con eventos), eventos de alta prioridad esta semana y disponibilidad de buffers. Se actualiza en tiempo real al agregar eventos.",
         },
         {
-          subtitle: "Color Codes",
-          text: "Green (1-3): Healthy load - You have good work-life balance. Yellow (4-6): Moderate - Pay attention to buffers. Orange (7-8): High - Consider rescheduling non-critical tasks. Red (9-10): Critical - Potential burnout risk.",
+          subtitle: "Códigos de color",
+          text: "Verde (1-3): Carga saludable - Buen equilibrio. Amarillo (4-6): Moderado - Presta atención a los buffers. Naranja (7-8): Alto - Considera reprogramar tareas no críticas. Rojo (9-10): Crítico - Riesgo de agotamiento.",
         },
         {
-          subtitle: "Recommendations",
-          text: "When stress is high, Equilibria suggests: 'Add more buffers', 'Reduce high-priority items', or 'Delegate tasks'. These appear in your dashboard sidebar.",
+          subtitle: "Recomendaciones",
+          text: "Cuando el estrés es alto, Equilibria sugiere: 'Añadir más buffers', 'Reducir elementos de alta prioridad' o 'Delegar tareas'. Estas aparecen en la barra lateral del panel.",
         },
       ],
     },
     {
       id: "task-management",
-      title: "Task Management",
+      title: "Gestión de tareas",
       icon: <CheckCircle className="w-5 h-5" />,
       content: [
         {
-          subtitle: "Linked Tasks",
-          text: "Link tasks directly to events (e.g., 'Study for Exam' linked to your exam event). This keeps your tasks organized and shows which events have preparation tasks.",
+          subtitle: "Tareas vinculadas",
+          text: "Vincula tareas directamente a eventos (p.ej., 'Estudiar para el examen' vinculado al evento del examen). Esto mantiene tus tareas organizadas y muestra qué eventos requieren preparación.",
         },
         {
-          subtitle: "Task Lifecycle",
-          text: "Move tasks through stages: 'To Do' → 'In Progress' → 'Completed'. As you complete tasks, your overall stress level decreases because you're managing your workload.",
+          subtitle: "Ciclo de vida de la tarea",
+          text: "Mueve las tareas por etapas: 'Por hacer' → 'En progreso' → 'Completadas'. Al completar tareas, tu nivel de estrés general disminuye porque gestionas tu carga.",
         },
         {
-          subtitle: "Estimated Hours",
-          text: "When creating a task, estimate how long it will take. This helps Equilibria calculate if you have enough time before deadlines and identify overloaded weeks.",
+          subtitle: "Horas estimadas",
+          text: "Al crear una tarea, estima cuánto tardará. Esto ayuda a Equilibria a calcular si tienes tiempo suficiente antes de las fechas límite e identificar semanas sobrecargadas.",
         },
       ],
     },
     {
       id: "reports",
-      title: "Reports & Insights",
+      title: "Informes y análisis",
       icon: <BookOpen className="w-5 h-5" />,
       content: [
         {
-          subtitle: "Weekly Reports",
-          text: "Visit Reports to see metrics for the past week: total tasks, completion rate, average stress level, and hours logged for study/work.",
+          subtitle: "Informes semanales",
+          text: "Visita Informes para ver métricas de la semana pasada: tareas totales, tasa de finalización, nivel de estrés promedio y horas registradas de estudio/trabajo.",
         },
         {
-          subtitle: "Trends Over Time",
-          text: "Charts show your stress levels and task completion over weeks. Identify patterns: Do you stress more on certain days? Are you completing tasks consistently?",
+          subtitle: "Tendencias a lo largo del tiempo",
+          text: "Los gráficos muestran tus niveles de estrés y finalización de tareas a lo largo de las semanas. Identifica patrones: ¿Te estresas más ciertos días? ¿Completas tareas de forma constante?",
         },
         {
-          subtitle: "Productivity Insights",
-          text: "See correlations between your schedule density and task completion. For example: 'Weeks with >6 events/day have 15% lower completion rates.'",
+          subtitle: "Información de productividad",
+          text: "Observa correlaciones entre la densidad del calendario y la finalización de tareas. Por ejemplo: 'Semanas con >6 eventos/día tienen 15% menos tasa de finalización.'",
         },
       ],
     },
     {
       id: "best-practices",
-      title: "Best Practices",
+      title: "Mejores prácticas",
       icon: <Zap className="w-5 h-5" />,
       content: [
         {
-          subtitle: "Plan Weekly",
-          text: "Every Sunday, review your week. Add all events, estimate task hours, and check your stress level. If it's high, redistribute tasks or find non-critical items to reschedule.",
+          subtitle: "Planifica semanalmente",
+          text: "Cada domingo, revisa tu semana. Añade todos los eventos, estima horas de tareas y revisa tu nivel de estrés. Si es alto, redistribuye tareas o reprograma elementos no críticos.",
         },
         {
-          subtitle: "Use Buffer Time Wisely",
-          text: "Don't schedule events during buffer time. Use it for breaks, unexpected delays, or mental recovery. Buffers are your protection against a chaotic day.",
+          subtitle: "Usa el tiempo de buffer sabiamente",
+          text: "No programes eventos durante el tiempo de buffer. Úsalo para descansos, imprevistos o recuperación mental. Los buffers son tu protección ante un día caótico.",
         },
         {
-          subtitle: "Update Task Status",
-          text: "Regularly mark tasks as 'In Progress' or 'Completed'. This keeps your stress indicator accurate and helps you see real progress.",
+          subtitle: "Actualiza el estado de las tareas",
+          text: "Marca regularmente las tareas como 'En progreso' o 'Completadas'. Esto mantiene preciso tu indicador de estrés y te ayuda a ver el progreso real.",
         },
         {
-          subtitle: "Review Your Limits",
-          text: "If you consistently have >8 stress level, reconsider your work-study balance. The research behind Equilibria shows students working 8+ hours/day while studying have significantly lower academic performance.",
+          subtitle: "Revisa tus límites",
+          text: "Si consistentemente tienes >8 de estrés, reconsidera tu equilibrio trabajo-estudio. La investigación detrás de Equilibria muestra que estudiantes que trabajan 8+ horas/día mientras estudian tienen un rendimiento académico significativamente menor.",
         },
       ],
     },
     {
       id: "troubleshooting",
-      title: "Troubleshooting",
+      title: "Resolución de problemas",
       icon: <AlertCircle className="w-5 h-5" />,
       content: [
         {
-          subtitle: "Events Not Appearing",
-          text: "Ensure events have a start and end time, and a valid date. Refresh your browser if needed.",
+          subtitle: "Eventos no aparecen",
+          text: "Asegúrate de que los eventos tengan hora de inicio y fin y una fecha válida. Actualiza el navegador si es necesario.",
         },
         {
-          subtitle: "Stress Level Too High",
-          text: "Check if you have many high-priority events clustered together. Add buffer time or move low-priority events to other weeks.",
+          subtitle: "Nivel de estrés demasiado alto",
+          text: "Revisa si tienes muchos eventos de alta prioridad agrupados. Añade buffers o mueve eventos de baja prioridad a otras semanas.",
         },
         {
-          subtitle: "Can't Edit an Event",
-          text: "Make sure you're viewing the current week. Events can only be edited within the app. Click the event to open its details.",
+          subtitle: "No se puede editar un evento",
+          text: "Asegúrate de estar viendo la semana actual. Los eventos solo pueden editarse dentro de la app. Haz clic en el evento para abrir sus detalles.",
         },
         {
-          subtitle: "Questions or Issues",
-          text: "Contact support@equilibria.app or visit our FAQ page for more help.",
+          subtitle: "Preguntas o problemas",
+          text: "Contacta a support@equilibria.app o visita nuestra página de Preguntas Frecuentes para más ayuda.",
         },
       ],
     },
@@ -223,7 +223,7 @@ export default function InstructionsPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-muted-foreground">Loading...</div>
+        <div className="text-muted-foreground">Cargando...</div>
       </div>
     )
   }
@@ -234,19 +234,19 @@ export default function InstructionsPage() {
         <div className="flex items-center justify-between mb-8">
           <Button variant="ghost" onClick={() => router.back()} className="flex items-center gap-2">
             <ArrowLeft className="w-4 h-4" />
-            Back
+            Atrás
           </Button>
           {user && (
             <Link href="/dashboard">
-              <Button className="bg-primary hover:bg-primary/90">Go to Dashboard</Button>
+              <Button className="bg-primary hover:bg-primary/90">Ir al Panel</Button>
             </Link>
           )}
         </div>
 
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-foreground mb-2">Equilibria Guide</h1>
+          <h1 className="text-4xl font-bold text-foreground mb-2">Guía de Equilibria</h1>
           <p className="text-lg text-muted-foreground">
-            Learn how to manage your time, reduce stress, and achieve better work-study balance
+            Aprende a gestionar tu tiempo, reducir el estrés y lograr un mejor equilibrio entre trabajo y estudio
           </p>
         </div>
 
@@ -285,17 +285,15 @@ export default function InstructionsPage() {
         <Card className="border border-border p-6 mt-8">
           <h3 className="font-semibold text-foreground mb-2 flex items-center gap-2">
             <Clock className="w-5 h-5 text-primary" />
-            Quick Tip
+            Consejo rápido
           </h3>
           <p className="text-muted-foreground text-sm">
-            Research shows student-workers who actively manage buffers and monitor stress levels have 20-30% better
-            academic performance. Start with small changes: add one event at a time, review your stress indicator daily,
-            and adjust your schedule accordingly.
+            Las investigaciones muestran que los estudiantes trabajadores que gestionan activamente los buffers y monitorizan los niveles de estrés tienen un 20-30% mejor rendimiento académico. Empieza con pequeños cambios: añade un evento a la vez, revisa tu indicador de estrés diariamente y ajusta tu horario según sea necesario.
           </p>
         </Card>
 
         <div className="text-center mt-8 text-muted-foreground text-sm">
-          <p>Have more questions? Contact us or visit our FAQ</p>
+          <p>¿Tienes más preguntas? Contáctanos o visita nuestra página de Preguntas Frecuentes</p>
         </div>
       </div>
     </div>

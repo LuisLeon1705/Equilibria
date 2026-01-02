@@ -24,9 +24,9 @@ export function TaskForm({ onSuccess, onCancel }: TaskFormProps) {
   const supabase = getSupabaseClient()
 
   const validateForm = () => {
-    if (!title.trim()) return "Title is required"
-    if (!dueDate) return "Due date is required"
-    if (estimatedHours <= 0) return "Estimated hours must be greater than 0"
+    if (!title.trim()) return "El título es obligatorio"
+    if (!dueDate) return "La fecha límite es obligatoria"
+    if (estimatedHours <= 0) return "Las horas estimadas deben ser mayores a 0"
 
     return null
   }
@@ -48,7 +48,7 @@ export function TaskForm({ onSuccess, onCancel }: TaskFormProps) {
       } = await supabase.auth.getUser()
 
       if (!user) {
-        setError("You must be logged in")
+        setError("Debes iniciar sesión")
         return
       }
 
@@ -74,7 +74,7 @@ export function TaskForm({ onSuccess, onCancel }: TaskFormProps) {
       }
     } catch (err) {
       console.log("[v0] Error adding task:", err)
-      setError("An unexpected error occurred")
+      setError("Ocurrió un error inesperado")
     } finally {
       setLoading(false)
     }
@@ -90,10 +90,10 @@ export function TaskForm({ onSuccess, onCancel }: TaskFormProps) {
       )}
 
       <div>
-        <label className="block text-sm font-medium text-foreground mb-1">Task Title</label>
+        <label className="block text-sm font-medium text-foreground mb-1">Título de la tarea</label>
         <Input
           type="text"
-          placeholder="e.g., Read Chapter 5"
+          placeholder="Ej: Leer capítulo 5"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
@@ -103,7 +103,7 @@ export function TaskForm({ onSuccess, onCancel }: TaskFormProps) {
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-foreground mb-1">Priority (1-5)</label>
+          <label className="block text-sm font-medium text-foreground mb-1">Prioridad (1-5)</label>
           <Input
             type="number"
             min="1"
@@ -118,7 +118,7 @@ export function TaskForm({ onSuccess, onCancel }: TaskFormProps) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-foreground mb-1">Est. Hours</label>
+          <label className="block text-sm font-medium text-foreground mb-1">Horas estimadas</label>
           <Input
             type="number"
             min="0.5"
@@ -134,14 +134,14 @@ export function TaskForm({ onSuccess, onCancel }: TaskFormProps) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-foreground mb-1">Due Date</label>
+        <label className="block text-sm font-medium text-foreground mb-1">Fecha límite</label>
         <Input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} required disabled={loading} />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-foreground mb-1">Description (optional)</label>
+        <label className="block text-sm font-medium text-foreground mb-1">Descripción (opcional)</label>
         <textarea
-          placeholder="Add task details..."
+          placeholder="Agrega detalles de la tarea..."
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground text-sm resize-none"
@@ -152,10 +152,10 @@ export function TaskForm({ onSuccess, onCancel }: TaskFormProps) {
 
       <div className="flex gap-2 pt-4">
         <Button type="submit" className="flex-1 bg-primary hover:bg-primary/90" disabled={loading}>
-          {loading ? "Adding..." : "Add Task"}
+          {loading ? "Agregando..." : "Agregar tarea"}
         </Button>
         <Button type="button" variant="outline" onClick={onCancel} disabled={loading}>
-          Cancel
+          Cancelar
         </Button>
       </div>
     </form>

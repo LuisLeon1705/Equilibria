@@ -97,7 +97,7 @@ export function TaskList({ tasks: initialTasks }: TaskListProps) {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input
             type="search"
-            placeholder="Search tasks..."
+            placeholder="Buscar tareas..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-9 w-full"
@@ -109,14 +109,18 @@ export function TaskList({ tasks: initialTasks }: TaskListProps) {
             checked={showCompleted}
             onCheckedChange={setShowCompleted}
           />
-          <Label htmlFor="show-completed" className="text-sm">Show Completed</Label>
+          <Label htmlFor="show-completed" className="text-sm">Mostrar completadas</Label>
         </div>
       </div>
 
       <div className="space-y-2">
         {filteredTasks.length === 0 ? (
           <p className="text-muted-foreground text-sm text-center py-6">
-            {searchTerm ? "No tasks match your search." : (showCompleted ? "No tasks to show." : "No active tasks. Great job!")}
+            {searchTerm
+              ? "No hay tareas que coincidan con tu búsqueda."
+              : (showCompleted
+                  ? "No hay tareas para mostrar."
+                  : "No hay tareas activas. ¡Buen trabajo!")}
           </p>
         ) : (
           filteredTasks.map((task) => (
@@ -127,7 +131,7 @@ export function TaskList({ tasks: initialTasks }: TaskListProps) {
                 onClick={() => toggleTaskComplete(task.id, task.status)}
                 disabled={updatingId === task.id}
                 className="mt-0.5 flex-shrink-0 h-auto px-0 py-0 text-muted-foreground hover:text-foreground transition-colors"
-                aria-label={`Mark "${task.title}" as ${task.status === "completed" ? "incomplete" : "complete"}`}
+                aria-label={`Marcar "${task.title}" como ${task.status === "completed" ? "incompleta" : "completada"}`}
               >
                 {task.status === "completed" ? (
                   <CheckCircle2 className="w-5 h-5 text-green-500" />
@@ -157,7 +161,7 @@ export function TaskList({ tasks: initialTasks }: TaskListProps) {
                 onClick={() => deleteTask(task.id)}
                 disabled={updatingId === task.id}
                 className="flex-shrink-0 h-auto px-0 py-0 text-muted-foreground hover:text-destructive transition-colors opacity-0 group-hover:opacity-100"
-                aria-label={`Delete task "${task.title}"`}
+                aria-label={`Eliminar tarea "${task.title}"`}
               >
                 <Trash2 className="w-4 h-4" />
               </Button>

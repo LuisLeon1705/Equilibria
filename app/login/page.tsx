@@ -55,8 +55,8 @@ export default function LoginPage() {
         </div>
 
         <Card className="border border-border bg-card p-8">
-          <h1 className="text-2xl font-bold text-foreground mb-2">Welcome Back</h1>
-          <p className="text-muted-foreground mb-6">Sign in to your account to continue</p>
+          <h1 className="text-2xl font-bold text-foreground mb-2">Bienvenido</h1>
+          <p className="text-muted-foreground mb-6">Inicia sesión en tu cuenta para continuar</p>
 
           {error && (
             <div className="mb-4 p-3 bg-destructive/10 border border-destructive/30 rounded-md flex gap-2 items-start">
@@ -83,7 +83,7 @@ export default function LoginPage() {
 
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-foreground mb-1">
-                Password
+                Contraseña
               </label>
               <Input
                 id="password"
@@ -102,21 +102,20 @@ export default function LoginPage() {
           </form>
 
           <p className="text-center text-muted-foreground text-sm mt-4">
-            Don't have an account?{" "}
-            <Link href="/signup" className="text-primary hover:underline font-medium">
-              Sign up
+            ¿No tienes una cuenta?<Link href="/signup" className="text-primary hover:underline font-medium">
+              Regístrate
             </Link>
           </p>
 
           <p className="text-center text-muted-foreground text-sm mt-2">
             <Link href="/forgot-password" className="text-primary hover:underline text-xs">
-              Forgot your password?
+              ¿Olvidaste tu contraseña?
             </Link>
           </p>
         </Card>
 
         <p className="text-center text-muted-foreground text-xs mt-6">
-          By signing in, you agree to our Terms of Service and Privacy Policy
+          Al iniciar sesión, aceptas nuestros Términos de Servicio y Política de Privacidad
         </p>
       </div>
     </div>

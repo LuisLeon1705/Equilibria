@@ -23,17 +23,17 @@ export function DashboardHeader({ profile, onLogout }: DashboardHeaderProps) {
 
         <nav className="hidden sm:flex items-center gap-6">
           <Link href="/dashboard" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-            Dashboard
+            Panel
           </Link>
           <Link href="/reports" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-            Reports
+            Reportes
           </Link>
           <Link
             href="/instructions"
             className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
           >
             <BookOpen className="w-4 h-4" />
-            Guide
+            Guía
           </Link>
         </nav>
 
@@ -44,7 +44,7 @@ export function DashboardHeader({ profile, onLogout }: DashboardHeaderProps) {
           </Avatar>
           <div className="text-right">
             <p className="text-sm font-medium text-foreground">{profile?.full_name || profile?.email}</p>
-            <p className="text-xs text-muted-foreground">{profile?.field_of_study || 'Student-Worker'}</p>
+            <p className="text-xs text-muted-foreground">{profile?.field_of_study || 'Estudiante-Trabajador'}</p>
           </div>
           <Link href="/profile">
             <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">

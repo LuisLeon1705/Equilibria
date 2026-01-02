@@ -195,7 +195,7 @@ export default function ReportsPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-muted-foreground">Loading...</div>
+        <div className="text-muted-foreground">Cargando...</div>
       </div>
     )
   }
@@ -209,28 +209,28 @@ export default function ReportsPage() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-foreground mb-2">Wellness & Productivity Reports</h1>
-          <p className="text-muted-foreground">Track your progress and stress patterns</p>
+          <h1 className="text-3xl font-bold text-foreground mb-2">Reporte de Bienestar y Productividad</h1>
+          <p className="text-muted-foreground">Sigue tu progreso y patrones de estrés</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
           <Card className="border border-border p-6">
-            <p className="text-muted-foreground text-sm font-medium mb-2">Total Tasks</p>
+            <p className="text-muted-foreground text-sm font-medium mb-2">Tareas Totales</p>
             <p className="text-3xl font-bold text-foreground">{stats.totalTasks}</p>
           </Card>
 
           <Card className="border border-border p-6">
-            <p className="text-muted-foreground text-sm font-medium mb-2">Completion Rate</p>
+            <p className="text-muted-foreground text-sm font-medium mb-2">Tasa de Finalización</p>
             <p className="text-3xl font-bold text-foreground">{completionRate}%</p>
           </Card>
 
           <Card className="border border-border p-6">
-            <p className="text-muted-foreground text-sm font-medium mb-2">Avg. Stress</p>
+            <p className="text-muted-foreground text-sm font-medium mb-2">Estrés Promedio</p>
             <p className="text-3xl font-bold text-foreground">{stats.avgStress}/10</p>
           </Card>
 
           <Card className="border border-border p-6">
-            <p className="text-muted-foreground text-sm font-medium mb-2">Tasks Completed</p>
+            <p className="text-muted-foreground text-sm font-medium mb-2">Tareas Completadas</p>
             <p className="text-3xl font-bold text-foreground">{stats.completedTasks}</p>
           </Card>
         </div>
@@ -238,43 +238,43 @@ export default function ReportsPage() {
         <Card className="border border-border p-6 mb-6">
           <div className="p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <Button variant="outline" onClick={() => handleDateChange("prev")}>Prev</Button>
-              <Button variant="outline" onClick={() => handleDateChange("today")}>Today</Button>
-              <Button variant="outline" onClick={() => handleDateChange("next")}>Next</Button>
+              <Button variant="outline" onClick={() => handleDateChange("prev")}>Anterior</Button>
+              <Button variant="outline" onClick={() => handleDateChange("today")}>Hoy</Button>
+              <Button variant="outline" onClick={() => handleDateChange("next")}>Siguiente</Button>
             </div>
             <h2 className="text-lg sm:text-xl font-bold text-center order-first sm:order-none">{headerTitle}</h2>
             <div className="flex items-center gap-2">
-              <Button variant={view === "week" ? "default" : "outline"} onClick={() => setView("week")}>Week</Button>
-              <Button variant={view === "month" ? "default" : "outline"} onClick={() => setView("month")}>Month</Button>
-              <Button variant={view === "year" ? "default" : "outline"} onClick={() => setView("year")}>Year</Button>
+              <Button variant={view === "week" ? "default" : "outline"} onClick={() => setView("week")}>Semana</Button>
+              <Button variant={view === "month" ? "default" : "outline"} onClick={() => setView("month")}>Mes</Button>
+              <Button variant={view === "year" ? "default" : "outline"} onClick={() => setView("year")}>Año</Button>
             </div>
           </div>
-          <h3 className="text-lg font-semibold text-foreground mb-4">Stress Trend</h3>
+          <h3 className="text-lg font-semibold text-foreground mb-4">Tendencia de Estrés</h3>
           <LineChart data={stats.trendData} />
         </Card>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <Card className="border border-border p-6">
-            <h3 className="text-lg font-semibold text-foreground mb-4">Task Completion</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-4">Finalización de Tareas</h3>
             <BarChart
               colors={[colorLow, colorHigh]}
               data={[
-                { label: "Completed", value: stats.completedTasks },
-                { label: "Pending", value: stats.totalTasks - stats.completedTasks },
+                { label: "Completadas", value: stats.completedTasks },
+                { label: "Pendientes", value: stats.totalTasks - stats.completedTasks },
               ]}
             />
           </Card>
           
           <Card className="border border-border p-6">
-            <h3 className="text-lg font-semibold text-foreground mb-4">Recommendations</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-4">Recomendaciones</h3>
             <div className="space-y-2 text-sm text-muted-foreground">
               {stats.avgStress > 7 && (
                 <p className="text-stress-high">
-                  ⚠️ Your stress levels are elevated. Consider adding more buffer time or reducing commitments.
+                  ⚠️ Tus niveles de estrés están elevados. Considera añadir más tiempo de margen o reducir compromisos.
                 </p>
               )}
               {completionRate < 50 && (
-                <p>💡 Focus on completing high-priority tasks first. Break large tasks into smaller steps.</p>
+                <p>💡 Concéntrate en completar primero las tareas de alta prioridad. Divide las tareas grandes en pasos más pequeños.</p>
               )}
             </div>
           </Card>

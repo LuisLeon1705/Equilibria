@@ -35,7 +35,7 @@ export default function ForgotPasswordPage() {
         setEmail("")
       }
     } catch (err) {
-      setError("An unexpected error occurred. Please try again.")
+      setError("Ocurrio un error inesperado. Por favor, intenta de nuevo.")
     } finally {
       setLoading(false)
     }
@@ -53,9 +53,9 @@ export default function ForgotPasswordPage() {
         </div>
 
         <Card className="border border-border bg-card p-8">
-          <h1 className="text-2xl font-bold text-foreground mb-2">Reset Your Password</h1>
+          <h1 className="text-2xl font-bold text-foreground mb-2">Restablecer tu contraseña</h1>
           <p className="text-muted-foreground mb-6">
-            Enter your email address and we'll send you a link to reset your password.
+            Ingresa tu dirección de correo electrónico y te enviaremos un enlace para restablecer tu contraseña.
           </p>
 
           {error && (
@@ -69,8 +69,8 @@ export default function ForgotPasswordPage() {
             <div className="mb-4 p-3 bg-green-100/10 border border-green-300/30 rounded-md flex gap-2 items-start">
               <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
               <div className="text-sm text-green-600">
-                <p className="font-medium">Check your email</p>
-                <p>We've sent a password reset link to your email address.</p>
+                <p className="font-medium">Revisa tu Correo</p>
+                <p>Hemos enviado un enlace para restablecer tu contraseña a tu dirección de correo electrónico.</p>
               </div>
             </div>
           )}
@@ -78,7 +78,7 @@ export default function ForgotPasswordPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">
-                Email Address
+                Email
               </label>
               <Input
                 id="email"
@@ -101,14 +101,14 @@ export default function ForgotPasswordPage() {
           </form>
 
           <p className="text-center text-muted-foreground text-sm mt-4">
-            Remember your password?{" "}
+            ¿Recordar tu contraseña?{" "}
             <Link href="/login" className="text-primary hover:underline font-medium">
-              Sign in
+              Iniciar sesión
             </Link>
           </p>
         </Card>
 
-        <p className="text-center text-muted-foreground text-xs mt-6">Having trouble? Contact us for support</p>
+        <p className="text-center text-muted-foreground text-xs mt-6">¿Problemas? Contacta con soporte</p>
       </div>
     </div>
   )

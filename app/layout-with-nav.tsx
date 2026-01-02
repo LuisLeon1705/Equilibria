@@ -54,7 +54,7 @@ export function LayoutWithNav({ children }: LayoutWithNavProps) {
     if (loading) {
         return (
             <div className="min-h-screen bg-background flex items-center justify-center">
-                <div className="text-muted-foreground">Loading...</div>
+                <div className="text-muted-foreground">Cargando...</div>
             </div>
         )
     }

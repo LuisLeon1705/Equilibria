@@ -97,15 +97,15 @@ export function Calendar({ events }: CalendarProps) {
                         className={`p-2 rounded text-xs space-y-1 ${typeBadges[event.type as keyof typeof typeBadges] || typeBadges.personal} bg-opacity-50`}
                       >
                         <p>
-                          <span className="font-semibold">Time:</span> {formatTime(event.start_time)} -{" "}
+                          <span className="font-semibold">Hora:</span> {formatTime(event.start_time)} -{" "}
                           {formatTime(event.end_time)}
                         </p>
                         <p>
-                          <span className="font-semibold">Priority:</span> P{event.priority}
+                          <span className="font-semibold">Prioridad:</span> P{event.priority}
                         </p>
                         {event.description && (
                           <p>
-                            <span className="font-semibold">Notes:</span> {event.description}
+                            <span className="font-semibold">Notas:</span> {event.description}
                           </p>
                         )}
                       </div>

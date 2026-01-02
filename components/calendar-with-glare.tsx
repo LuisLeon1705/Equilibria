@@ -97,7 +97,7 @@ export function CalendarWithGlare({ events, colorLow = "#22c55e", colorHigh = "#
           <Button variant="outline" size="icon" onClick={handlePrevWeek} aria-label="Previous week">
             <ChevronLeft className="w-4 h-4" />
           </Button>
-          <Button variant="outline" onClick={handleToday}>Today</Button>
+          <Button variant="outline" onClick={handleToday}>Hoy</Button>
           <Button variant="outline" size="icon" onClick={handleNextWeek} aria-label="Next week">
             <ChevronRight className="w-4 h-4" />
           </Button>
@@ -127,12 +127,12 @@ export function CalendarWithGlare({ events, colorLow = "#22c55e", colorHigh = "#
                   {format(day, "EEE", { locale: es })}
                 </p>
                 <p className="text-lg font-bold text-foreground">{format(day, "d")}</p>
-                <p className="text-xs text-muted-foreground mt-1">Stress: {dayStress}/10</p>
+                <p className="text-xs text-muted-foreground mt-1">Estrés: {dayStress}/10</p>
               </div>
 
               <div className="space-y-1 min-h-40 relative z-10">
                 {groupedEvents[dateStr]?.length === 0 ? (
-                  <p className="text-xs text-muted-foreground text-center py-8">No events</p>
+                  <p className="text-xs text-muted-foreground text-center py-8">Sin eventos</p>
                 ) : (
                   groupedEvents[dateStr]?.map((event) => {
                     const isExpanded = expandedEvent === event.id
@@ -155,15 +155,15 @@ export function CalendarWithGlare({ events, colorLow = "#22c55e", colorHigh = "#
                             className={`p-2 rounded text-xs space-y-1 ${typeBadges[event.type as keyof typeof typeBadges] || typeBadges.personal} bg-opacity-50`}
                           >
                             <p>
-                              <span className="font-semibold">Time:</span> {formatTime(event.start_time)} -{" "}
+                              <span className="font-semibold">Hora:</span> {formatTime(event.start_time)} -{" "}
                               {formatTime(event.end_time)}
                             </p>
                             <p>
-                              <span className="font-semibold">Priority:</span> P{event.priority}
+                              <span className="font-semibold">Prioridad:</span> P{event.priority}
                             </p>
                             {event.description && (
                               <p>
-                                <span className="font-semibold">Notes:</span> {event.description}
+                                <span className="font-semibold">Notas:</span> {event.description}
                               </p>
                             )}
                           </div>

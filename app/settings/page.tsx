@@ -56,7 +56,7 @@ export default function SettingsPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-muted-foreground">Loading...</div>
+        <div className="text-muted-foreground">Cargando...</div>
       </div>
     )
   }
@@ -78,8 +78,8 @@ export default function SettingsPage() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-foreground mb-2">Settings & Customization</h1>
-          <p className="text-muted-foreground">Personalize your Equilibria experience</p>
+          <h1 className="text-3xl font-bold text-foreground mb-2">Configuración y Personalización</h1>
+          <p className="text-muted-foreground">Personaliza tu experiencia en Equilibria</p>
         </div>
         <div className="space-y-8">
           <ProfileForm user={user} />

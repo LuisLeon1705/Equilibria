@@ -78,12 +78,12 @@ export default function ResetPasswordPage() {
       <div className="min-h-screen bg-background flex items-center justify-center px-4">
         <div className="w-full max-w-md">
           <Card className="border border-border bg-card p-8">
-            <h1 className="text-2xl font-bold text-foreground mb-4">Invalid or Expired Link</h1>
+            <h1 className="text-2xl font-bold text-foreground mb-4">Enlace Invalido o Expirado</h1>
             <p className="text-muted-foreground mb-6">
-              This password reset link has expired or is invalid. Please request a new one.
+              Este enlace de restablecimiento de contraseña no es válido o ha expirado. Por favor, solicita un nuevo enlace.
             </p>
             <Button onClick={() => router.push("/forgot-password")} className="w-full bg-primary hover:bg-primary/90">
-              Request New Link
+              Solicitar Nuevo Enlace
             </Button>
           </Card>
         </div>
@@ -103,8 +103,8 @@ export default function ResetPasswordPage() {
         </div>
 
         <Card className="border border-border bg-card p-8">
-          <h1 className="text-2xl font-bold text-foreground mb-2">Set New Password</h1>
-          <p className="text-muted-foreground mb-6">Enter your new password below.</p>
+          <h1 className="text-2xl font-bold text-foreground mb-2">Escriba una nueva contraseña</h1>
+          <p className="text-muted-foreground mb-6">Ingrese su nueva contraseña a continuación.</p>
 
           {error && (
             <div className="mb-4 p-3 bg-destructive/10 border border-destructive/30 rounded-md flex gap-2 items-start">
@@ -116,14 +116,14 @@ export default function ResetPasswordPage() {
           {success && (
             <div className="mb-4 p-3 bg-green-100/10 border border-green-300/30 rounded-md flex gap-2 items-start">
               <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-green-600">Password updated successfully! Redirecting...</p>
+              <p className="text-sm text-green-600">¡Contraseña actualizada exitosamente! Redirigiendo...</p>
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-foreground mb-1">
-                New Password
+                Nueva Contraseña
               </label>
               <Input
                 id="password"
@@ -142,7 +142,7 @@ export default function ResetPasswordPage() {
                     <span className="w-4 h-4 text-muted-foreground">○</span>
                   )}
                   <span className={passwordLengthValid ? "text-green-600" : "text-muted-foreground"}>
-                    At least 8 characters
+                    Almenos 8 caracteres
                   </span>
                 </p>
                 <p className="flex items-center gap-2">
@@ -152,7 +152,7 @@ export default function ResetPasswordPage() {
                     <span className="w-4 h-4 text-muted-foreground">○</span>
                   )}
                   <span className={hasUpperCase ? "text-green-600" : "text-muted-foreground"}>
-                    At least one uppercase letter
+                    Al menos una letra mayúscula
                   </span>
                 </p>
                 <p className="flex items-center gap-2">
@@ -161,14 +161,14 @@ export default function ResetPasswordPage() {
                   ) : (
                     <span className="w-4 h-4 text-muted-foreground">○</span>
                   )}
-                  <span className={hasNumbers ? "text-green-600" : "text-muted-foreground"}>At least one number</span>
+                  <span className={hasNumbers ? "text-green-600" : "text-muted-foreground"}>Al menos un número</span>
                 </p>
               </div>
             </div>
 
             <div>
               <label htmlFor="confirmPassword" className="block text-sm font-medium text-foreground mb-1">
-                Confirm Password
+                Confirmar Contraseña
               </label>
               <Input
                 id="confirmPassword"
@@ -184,12 +184,12 @@ export default function ResetPasswordPage() {
                   {passwordsMatch ? (
                     <>
                       <Check className="w-4 h-4 text-green-600" />
-                      <span className="text-green-600">Passwords match</span>
+                      <span className="text-green-600">Las Contraseñas Coinciden</span>
                     </>
                   ) : (
                     <>
                       <span className="w-4 h-4 text-destructive">✕</span>
-                      <span className="text-destructive">Passwords do not match</span>
+                      <span className="text-destructive">Las Contraseñas no coinciden</span>
                     </>
                   )}
                 </p>
